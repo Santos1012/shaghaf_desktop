@@ -32,14 +32,9 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^14.1.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
@@ -67,11 +62,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
+        - asset: assets/fonts/82e24c09e3a62424b1f9211f504ac691b19f483623708a4afe552c6f22ea05fa.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

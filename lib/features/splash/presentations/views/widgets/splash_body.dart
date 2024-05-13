@@ -55,7 +55,7 @@ class _SplashBodyState extends State<SplashBody> {
     Future.delayed(
       const Duration(milliseconds: 3000),
       () {
-        GoRouter.of(context).go(Routers.newBook);
+        GoRouter.of(context).go(Routers.login);
       },
     );
   }

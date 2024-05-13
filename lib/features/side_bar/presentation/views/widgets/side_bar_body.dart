@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
+import 'package:saghaf_desktop/features/auth/presentation/views/login_view.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/views/new_book_view.dart';
 import 'package:saghaf_desktop/features/side_bar/presentation/manager/side_bar_cubit.dart';
 import 'package:saghaf_desktop/features/splash/presentations/views/splash_view.dart';
@@ -11,7 +12,11 @@ class SideBarBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SidebarXController controller = SidebarXController(selectedIndex: 0);
-    List<Widget> screens = [NewBookView(), SplashView(),];
+    List<Widget> screens = [
+      const NewBookView(),
+      const SplashView(),
+      const LoginView()
+    ];
     return BlocBuilder<SideBarCubit, SideBarState>(
       builder: (context, state) {
         var cubit = BlocProvider.of<SideBarCubit>(context);
@@ -42,7 +47,6 @@ class SideBarBody extends StatelessWidget {
                   size: 20,
                 ),
               ),
-
               extendedTheme: SidebarXTheme(
                 width: 290.w(context),
                 decoration: const BoxDecoration(
@@ -54,9 +58,9 @@ class SideBarBody extends StatelessWidget {
                     height: 141.h(context),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Image.asset("assets/shaghaf_logo.png"),));
+                      child: Image.asset("assets/shaghaf_logo.png"),
+                    ));
               },
-
               items: [
                 SidebarXItem(
                   icon: Icons.add,
@@ -84,7 +88,6 @@ class SideBarBody extends StatelessWidget {
                   },
                   label: 'Current reservations',
                 ),
-
                 SidebarXItem(
                   icon: Icons.people,
                   onTap: () {
@@ -99,7 +102,6 @@ class SideBarBody extends StatelessWidget {
                   label: 'Requests ',
                 ),
               ],
-
             ),
             Expanded(child: screens[cubit.index]),
           ],

@@ -12,15 +12,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      // locale: DevicePreview.locale(context),
-      // builder: DevicePreview.appBuilder,
-      theme: ThemeData(
-        textTheme: GoogleFonts.comfortaaTextTheme(
-          Theme.of(context).textTheme,)
-      ),
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return LayoutBuilder(
+  builder: (context, constraints) {
+
+        return SizedBox(
+          child: MaterialApp.router(
+            // locale: DevicePreview.locale(context),
+            // builder: DevicePreview.appBuilder,
+            theme: ThemeData(
+              textTheme: GoogleFonts.comfortaaTextTheme(
+                Theme.of(context).textTheme,)
+            ),
+            debugShowCheckedModeBanner: false,
+            routerConfig: AppRouter.router,
+          ),
+        );
+      }
     );
   }
 }

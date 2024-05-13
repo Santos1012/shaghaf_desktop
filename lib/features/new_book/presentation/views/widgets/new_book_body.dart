@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
@@ -134,10 +133,11 @@ class NewBookBody extends StatelessWidget {
                     onPressed: () {},
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.w(context))),
-                    color: Color(0xFF20473F),
-                    child: Text(
+                    color: const Color(0xFF20473F),
+                    child: const Text(
                       "Done",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: "Comfortaa"),
                     )),
               ),
               SizedBox(
@@ -156,10 +156,11 @@ class NewBookBody extends StatelessWidget {
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.w(context))),
-                    color: Color(0xFF838383),
+                    color: const Color(0xFF838383),
                     child: const Text(
-                      "Cancel",
-                      style: TextStyle(color: Colors.white),
+                      "Clear All",
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: "Comfortaa"),
                     )),
               ),
             ]),

@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:saghaf_desktop/core/function/animation_page.dart';
+import 'package:saghaf_desktop/features/side_bar/presentation/views/side_bar_view.dart';
 import 'package:saghaf_desktop/features/auth/presentation/views/login_view.dart';
 
 import '../../features/splash/presentations/views/splash_view.dart';
@@ -19,6 +20,7 @@ abstract class AppRouter {
       ),
       // Routers.goRoute(Routers.onBoarding, const OnBoardingView()),
       Routers.goRoute(Routers.login, const LoginView()),
+      Routers.goRoute(Routers.newBook, const SideBarView()),
       // Routers.goRoute(Routers.restPass, const ForgetView()),
       // Routers.goRoute(Routers.verify, const VerifyView()),
       // Routers.goRoute(Routers.bnb, const CustomBNB()),

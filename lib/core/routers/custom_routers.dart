@@ -4,7 +4,7 @@ import 'package:saghaf_desktop/core/function/animation_page.dart';
 class Routers {
   // static const onBoarding = '/onBoarding';
   static const login = '/login';
-  // static const verify = '/verify';
+  static const newBook = '/newBook';
   // static const restPass = '/restPass';
   // static const bnb = '/bnb';
   // static const rooms = '/rooms';

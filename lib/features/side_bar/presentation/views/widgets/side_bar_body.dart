@@ -2,9 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/auth/presentation/views/login_view.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/views/current_reservation_view.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/views/new_book_view.dart';
+import 'package:saghaf_desktop/features/requests/requests_view.dart';
 import 'package:saghaf_desktop/features/side_bar/presentation/manager/side_bar_cubit.dart';
-import 'package:saghaf_desktop/features/splash/presentations/views/splash_view.dart';
+
 
 class SideBarBody extends StatelessWidget {
   const SideBarBody({super.key});
@@ -14,8 +16,8 @@ class SideBarBody extends StatelessWidget {
     SidebarXController controller = SidebarXController(selectedIndex: 0);
     List<Widget> screens = [
       const NewBookView(),
-      const SplashView(),
-      const LoginView()
+      const CurrentReservationView(),
+      const RequestsView()
     ];
     return BlocBuilder<SideBarCubit, SideBarState>(
       builder: (context, state) {

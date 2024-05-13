@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
-import 'package:saghaf_desktop/features/new_book/presentation/views/widgets/custom_text_field.dart';
+import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
 
 class NewBookBody extends StatelessWidget {
   const NewBookBody({super.key});
@@ -22,8 +22,11 @@ class NewBookBody extends StatelessWidget {
         children: [
           Text(
             "Open New Booking",
-            style:
-                TextStyle(fontSize: 32.w(context), fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontSize: 32.w(context),
+              fontWeight: FontWeight.w700,
+              fontFamily: "Comfortaa",
+            ),
           ),
           SizedBox(
             height: 46.h(context),
@@ -31,7 +34,7 @@ class NewBookBody extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: CustomTextField(
+                child: AppCustomTextField(
                   hint: "Enter full Name",
                   textName: "Full Name",
                   controller: nameController,
@@ -41,7 +44,7 @@ class NewBookBody extends StatelessWidget {
                 width: 20.w(context),
               ),
               Expanded(
-                child: CustomTextField(
+                child: AppCustomTextField(
                   hint: "Enter Phone Number",
                   textName: "Phone Number",
                   controller: phoneController,
@@ -57,7 +60,7 @@ class NewBookBody extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: CustomTextField(
+                  child: AppCustomTextField(
                     hint: "dd/mm/yy",
                     textName: "Date",
                     controller: dateController,
@@ -72,7 +75,7 @@ class NewBookBody extends StatelessWidget {
                   width: 20.w(context),
                 ),
                 Expanded(
-                  child: CustomTextField(
+                  child: AppCustomTextField(
                     hint: "hh:mm",
                     textName: "Time",
                     controller: timeController,
@@ -102,7 +105,7 @@ class NewBookBody extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: CustomTextField(
+                  child: AppCustomTextField(
                     hint: "Enter Price",
                     textName: "Price",
                     controller: priceController,
@@ -112,7 +115,7 @@ class NewBookBody extends StatelessWidget {
                   width: 20.w(context),
                 ),
                 Expanded(
-                  child: CustomTextField(
+                  child: AppCustomTextField(
                     hint: "Enter Place",
                     textName: "Place",
                     controller: placeController,

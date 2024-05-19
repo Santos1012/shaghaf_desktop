@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/list_widget.dart';
@@ -60,6 +61,7 @@ class ListRow extends StatelessWidget {
           ListWidget(
             isAction: isAction,
             text: text6,
+            closed: true,
             fontWeight: FontWeight.w600,
           ),
         ],

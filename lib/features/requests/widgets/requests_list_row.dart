@@ -71,22 +71,29 @@ class RequestsListRow extends StatelessWidget {
             child: SingleChildScrollView(
               child: Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                        color: Colors.white,
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(Icons.done),
-                        )),
-                  ),
+                  Container(
+                    width: 60.w(context),
+                    height: 60.h(context),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: const Color(0xFF20473F), width: 2),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.done),
+                      )),
                   const SizedBox(width: 20),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
-                          color: Colors.white,
+                          width: 60.w(context),
+                          height: 60.h(context),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: const Color(0xFFf04C29), width: 2),
+                          ),
                           child: const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Icon(

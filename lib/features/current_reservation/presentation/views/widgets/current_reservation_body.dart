@@ -55,19 +55,83 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    Text(
+                      "1/10",
+                      style: TextStyle(
+                          fontSize: 20.w(context),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Comfortaa",
+                          color: const Color(0xFF6E6E6E)),
+                    ),
+                    SizedBoxApp(
+                      w: 20.w(context),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      padding:EdgeInsets.only(left: 10.w(context)),
+                      icon:  Icon(Icons.arrow_back_ios,size: 30.w(context),),
+                      style: ButtonStyle(
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                              color: const Color(0xFF20473E).withOpacity(0.75),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBoxApp(
+                      w: 20.w(context),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_forward_ios,size: 30.w(context)),
+                      padding:EdgeInsets.only(right: 3.w(context)),
+
+                      style: ButtonStyle(
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                              color: const Color(0xFF20473E).withOpacity(0.75),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBoxApp(
+                      w: 20.w(context),
+                    ),
+                    Text(
+                      "Go to",
+                      style: TextStyle(
+                          fontSize: 20.w(context),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Comfortaa",
+                          color: const Color(0xFF6E6E6E)),
+                    ),
+                    SizedBoxApp(
+                      w: 20.w(context),
+                    ),
                     Container(
-                        width: 180.w(context),
-                        height: 50.h(context),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w(context),
+                          vertical: 10.h(context),
+                        ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF20473E).withOpacity(0.75),
                           borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: const Color(0xFF20473E).withOpacity(0.75),
+                          ),
                         ),
                         child: Center(
-                            child: Text("New Entry",
+                            child: Text("20 page",
                                 style: TextStyle(
                                   fontSize: 20.w(context),
-                                  color: Colors.white,
+                                  color: const Color(0xFF6E6E6E),
                                   fontWeight: FontWeight.w500,
                                   fontFamily: "Comfortaa",
                                 ))))

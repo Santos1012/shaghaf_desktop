@@ -9,6 +9,7 @@ class RequestsListRow extends StatelessWidget {
   final String text3;
   final String text4;
   final String text5;
+  final bool? header;
 
   final Color color;
   final bool hasAction;
@@ -22,89 +23,75 @@ class RequestsListRow extends StatelessWidget {
       required this.text4,
       required this.text5,
       this.hasAction = false,
-      required this.color});
+      required this.color, this.header=false});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 6 / 8,
-          color: color,
-          height: 80.h(context),
+        SizedBox(
+          width: 900.w(context),
           child: Row(
             children: [
               ListWidget(
                 text: text0,
-                fontWeight: FontWeight.w600,
+                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
               ),
               ListWidget(
                 text: text1,
-                fontWeight: FontWeight.w600,
+                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
               ),
               ListWidget(
                 text: text2,
-                fontWeight: FontWeight.w600,
+                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
               ),
               ListWidget(
                 text: text3,
-                fontWeight: FontWeight.w600,
+                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
               ),
               ListWidget(
                 text: text4,
-                fontWeight: FontWeight.w600,
+                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
               ),
               ListWidget(
                 text: text5,
-                fontWeight: FontWeight.w600,
+                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
               ),
             ],
           ),
         ),
-        if (hasAction &&
-            MediaQuery.of(context).size.width -
-                    MediaQuery.of(context).size.width * 6 / 8 >=
-                200)
-          Container(
-            color: Colors.grey.withOpacity(0.1),
-            height: 80.h(context),
-            child: SingleChildScrollView(
-              child: Row(
-                children: [
-                  Container(
-                    width: 60.w(context),
-                    height: 60.h(context),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFF20473F), width: 2),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.done),
-                      )),
-                  const SizedBox(width: 20),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                          width: 60.w(context),
-                          height: 60.h(context),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: const Color(0xFFf04C29), width: 2),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.close,
-                              color: Color(0xFFF04C29),
-                            ),
-                          )),
+          header!?SizedBox.shrink():SingleChildScrollView(
+            child: Row(
+              children: [
+                Container(
+                  width: 60.w(context),
+                  height: 60.h(context),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: const Color(0xFF20473F), width: 2),
                     ),
+                    child: Icon(Icons.done,size: 30.w(context),),
+                    ),
+                const SizedBox(width: 20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                        width: 60.w(context),
+                        height: 60.h(context),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: const Color(0xFFf04C29), width: 2),
+                        ),
+                        child:  Icon(
+                          Icons.close,
+                          size: 30.w(context),
+                          color: Color(0xFFF04C29),
+                        )),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )
       ],

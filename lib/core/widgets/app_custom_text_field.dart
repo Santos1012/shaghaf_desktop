@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 
@@ -9,6 +10,7 @@ class AppCustomTextField extends StatelessWidget {
   final bool? readOnly;
   final void Function()? onTap;
   final Color? color;
+  final bool? phone;
 
   const AppCustomTextField(
       {super.key,
@@ -17,7 +19,7 @@ class AppCustomTextField extends StatelessWidget {
       required this.textName,
       required this.controller,
       this.readOnly,
-      this.onTap, this.color});
+      this.onTap, this.color, this.phone=false});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,6 +36,9 @@ class AppCustomTextField extends StatelessWidget {
           height: 32.h(context),
         ),
         TextFormField(
+          inputFormatters: phone==true? [
+            LengthLimitingTextInputFormatter(11), // Limits the input to 2 characters
+          ]:[],
           controller: controller,
           readOnly: readOnly ?? false,
           onTap: onTap,

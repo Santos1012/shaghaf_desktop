@@ -37,6 +37,7 @@ class _RequestsBodyState extends State<RequestsBody> {
             h: 40.h(context),
           ),
           RequestsListRow(
+            header: true,
             text0: "Name",
             text1: "Phone",
             text2: "Date",

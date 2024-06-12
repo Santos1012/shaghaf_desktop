@@ -1,3 +1,4 @@
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
@@ -8,6 +9,16 @@ class NewBookBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> _items = [
+      'smoking room',
+      'gaming room',
+      'edu room',
+      'other'
+    ];
+    final List<String> _place = [
+      'Roxy',
+      'Masr Elgededa’',
+    ];
     TextEditingController nameController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
     TextEditingController dateController = TextEditingController();
@@ -45,6 +56,7 @@ class NewBookBody extends StatelessWidget {
               ),
               Expanded(
                 child: AppCustomTextField(
+                  phone: true,
                   hint: "Enter Phone Number",
                   textName: "Phone Number",
                   controller: phoneController,
@@ -105,22 +117,76 @@ class NewBookBody extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: AppCustomTextField(
-                    hint: "Enter Price",
-                    textName: "Price",
-                    controller: priceController,
-                  ),
-                ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Room",
+                      style: TextStyle(
+                          fontSize: 24.w(context),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Comfortaa"),
+                    ),
+                    SizedBoxApp(
+                      h: 30.h(context),
+                    ),
+                    CustomDropdown<String>(
+                      closedHeaderPadding: EdgeInsets.symmetric(horizontal: 12.w(context),vertical: 18.h(context)),
+                      hintText: 'add item',
+                      headerBuilder: (context, selectedItem) {
+                        return Text(
+                          selectedItem,
+                        );
+                      },
+                      items: _items,
+                      initialItem: _items[0],
+                      decoration: CustomDropdownDecoration(
+                        closedBorder: Border.all(
+                            color: const Color(0xFFB1B1B1), width: 1),
+                        expandedBorder: Border.all(
+                            color: const Color(0xFFB1B1B1), width: 1),
+                      ),
+                      onChanged: (value) {},
+                    )
+                  ],
+                )),
                 SizedBox(
                   width: 20.w(context),
                 ),
                 Expanded(
-                  child: AppCustomTextField(
-                    hint: "Enter Place",
-                    textName: "Place",
-                    controller: placeController,
-                  ),
-                ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Place",
+                          style: TextStyle(
+                              fontSize: 24.w(context),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Comfortaa"),
+                        ),
+                        SizedBoxApp(
+                          h: 30.h(context),
+                        ),
+                        CustomDropdown<String>(
+                          closedHeaderPadding: EdgeInsets.symmetric(horizontal: 12.w(context),vertical: 18.h(context)),
+                          hintText: 'add item',
+                          headerBuilder: (context, selectedItem) {
+                            return Text(
+                              selectedItem,
+                            );
+                          },
+                          items: _place,
+                          initialItem: _place[0],
+                          decoration: CustomDropdownDecoration(
+                            closedBorder: Border.all(
+                                color: const Color(0xFFB1B1B1), width: 1),
+                            expandedBorder: Border.all(
+                                color: const Color(0xFFB1B1B1), width: 1),
+                          ),
+                          onChanged: (value) {},
+                        )
+                      ],
+                    )),
               ],
             ),
           ),

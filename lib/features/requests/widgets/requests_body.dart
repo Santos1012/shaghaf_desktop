@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
@@ -36,18 +38,21 @@ class _RequestsBodyState extends State<RequestsBody> {
           SizedBoxApp(
             h: 40.h(context),
           ),
-          RequestsListRow(
-            header: true,
-            text0: "Name",
-            text1: "Phone",
-            text2: "Date",
-            text3: 'Time',
-            text4: "Timer",
-            text5: "Room",
-            color: Colors.grey.withOpacity(0.1),
+          Padding(
+            padding:  EdgeInsets.only(right: Platform.isWindows ?0:230.w(context)),
+            child: RequestsListRow(
+              header: true,
+              text0: "Name",
+              text1: "Phone",
+              text2: "Date",
+              text3: 'Time',
+              text4: "Timer",
+              text5: "Room",
+              color: Colors.grey.withOpacity(0.1),
+            ),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 7 / 8,
+            width:  Platform.isWindows ?MediaQuery.of(context).size.width * 7 / 8:double.infinity,
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 7,

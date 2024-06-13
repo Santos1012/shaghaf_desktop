@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/list_widget.dart';
@@ -29,38 +31,40 @@ class RequestsListRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: 900.w(context),
-          child: Row(
-            children: [
-              ListWidget(
-                text: text0,
-                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
-              ),
-              ListWidget(
-                text: text1,
-                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
-              ),
-              ListWidget(
-                text: text2,
-                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
-              ),
-              ListWidget(
-                text: text3,
-                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
-              ),
-              ListWidget(
-                text: text4,
-                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
-              ),
-              ListWidget(
-                text: text5,
-                fontWeight: header! ? FontWeight.w800:FontWeight.w400,
-              ),
-            ],
+        Expanded(
+          child: SizedBox(
+            width:Platform.isWindows ?900.w(context):double.infinity,
+            child: Row(
+              children: [
+                ListWidget(
+                  text: text0,
+                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                ),
+                ListWidget(
+                  text: text1,
+                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                ),
+                ListWidget(
+                  text: text2,
+                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                ),
+                ListWidget(
+                  text: text3,
+                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                ),
+                ListWidget(
+                  text: text4,
+                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                ),
+                ListWidget(
+                  text: text5,
+                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                ),
+              ],
+            ),
           ),
         ),
-          header!?SizedBox.shrink():SingleChildScrollView(
+          header!?const SizedBox.shrink():SingleChildScrollView(
             child: Row(
               children: [
                 Container(
@@ -73,24 +77,18 @@ class RequestsListRow extends StatelessWidget {
                     child: Icon(Icons.done,size: 30.w(context),),
                     ),
                 const SizedBox(width: 20),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                        width: 60.w(context),
-                        height: 60.h(context),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xFFf04C29), width: 2),
-                        ),
-                        child:  Icon(
-                          Icons.close,
-                          size: 30.w(context),
-                          color: Color(0xFFF04C29),
-                        )),
-                  ),
-                ),
+                Container(
+                    width: 60.w(context),
+                    height: 60.h(context),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: const Color(0xFFf04C29), width: 2),
+                    ),
+                    child:  Icon(
+                      Icons.close,
+                      size: 30.w(context),
+                      color: Color(0xFFF04C29),
+                    )),
               ],
             ),
           )

@@ -1,17 +1,25 @@
 import 'dart:io';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:saghaf_desktop/core/service_locator.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'core/routers/app_router.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
+  ServiceLocator().init();
   if (Platform.isWindows) {
+    await windowManager.ensureInitialized();
     WindowManager.instance.setMinimumSize(const Size(1000, 600));
   }
+    // DevicePreview(
+    // enabled: true,
+    // builder: (context) => const MyApp(), // Wrap your app
+    // );
+
   runApp(const MyApp());
 }
 

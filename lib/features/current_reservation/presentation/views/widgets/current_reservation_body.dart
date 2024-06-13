@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
@@ -35,7 +37,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
             ),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 1 / 3,
+            width:Platform.isWindows ?MediaQuery.of(context).size.width * 1 / 3:double.infinity,
             child: AppCustomTextField(
               hint: "Search",
               textName: "",
@@ -47,7 +49,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
             h: 40.h(context),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 5 / 6,
+            width:Platform.isWindows ? MediaQuery.of(context).size.width * 5 / 6:double.infinity,
             color: Colors.grey.withOpacity(0.1),
             child: Container(
               height: 80.h(context),
@@ -151,7 +153,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
             color: Colors.grey.withOpacity(0.1),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 5 / 6,
+            width: Platform.isWindows ?MediaQuery.of(context).size.width * 5 / 6:double.infinity,
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 7,

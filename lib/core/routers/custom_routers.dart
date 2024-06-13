@@ -5,6 +5,7 @@ class Routers {
   // static const onBoarding = '/onBoarding';
   static const login = '/login';
   static const newBook = '/newBook';
+  static const newBookMobile = '/newBookMobile';
   // static const restPass = '/restPass';
   // static const bnb = '/bnb';
   // static const rooms = '/rooms';

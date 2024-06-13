@@ -101,6 +101,7 @@ class ListWidget extends StatelessWidget {
             }
           },
           child: Text(
+            textAlign: TextAlign.start,
             text,
             style: TextStyle(
               fontSize: 24.w(context),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
@@ -68,7 +70,7 @@ class NewBookBody extends StatelessWidget {
             height: 48.h(context),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 415.w(context)),
+            padding: EdgeInsets.only(right: Platform.isWindows ?415.w(context):0),
             child: Row(
               children: [
                 Expanded(
@@ -113,7 +115,7 @@ class NewBookBody extends StatelessWidget {
             height: 46.h(context),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 415.w(context)),
+            padding: EdgeInsets.only(right:Platform.isWindows ? 415.w(context):0),
             child: Row(
               children: [
                 Expanded(
@@ -194,7 +196,7 @@ class NewBookBody extends StatelessWidget {
             height: 46.h(context),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 730.w(context)),
+            padding: EdgeInsets.only(right: Platform.isWindows ?  730.w(context):0),
             child: Row(children: [
               Expanded(
                 child: MaterialButton(

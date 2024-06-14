@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
+import 'package:saghaf_desktop/features/new_book/presentation/manager/get_users_cubit.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/views/add_user_view.dart';
 
 class NewBookBody extends StatelessWidget {
@@ -25,6 +27,7 @@ class NewBookBody extends StatelessWidget {
     ];
     TextEditingController nameController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
+    TextEditingController searchPhoneController = TextEditingController();
     TextEditingController dateController = TextEditingController();
     TextEditingController timeController = TextEditingController();
     TextEditingController priceController = TextEditingController();
@@ -56,48 +59,65 @@ class NewBookBody extends StatelessWidget {
           SizedBox(
             height: 32.h(context),
           ),
-          Row(
-            children: [
-              DropdownMenu(
-                onSelected: (value) {
-                  log(value.toString());
-                },
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(
-                    value: "01063557665",
-                    label: "01063557665",
-                  ),
-                  DropdownMenuEntry(
-                    value: "01063557665",
-                    label: "01001819452",
-                  ),
-                  DropdownMenuEntry(
-                    value: "01063557665",
-                    label: "01144399555",
-                  ),
-                ],
-                width: 650.w(context),
-                enableFilter: true,
-              ),
-              SizedBox(
-                width: 20.w(context),
-              ),
-              MaterialButton(
-                  height: 54.h(context),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AddUserView(),
-                    ));
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.w(context))),
-                  color: const Color(0xFF838383),
-                  child: const Text(
-                    "Add User",
-                    style:
-                        TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
-                  )),
-            ],
+          BlocConsumer<GetUsersCubit, GetUsersState>(
+            listener: (context, state) {},
+            buildWhen:(previous, current) => current is GetUsersSuccess,
+            builder: (context, state) {
+              if (state is GetUsersSuccess) {
+                return Row(
+                  children: [
+                    DropdownMenu(
+                      onSelected: (value) {
+                        log(value.toString());
+                      },
+                      dropdownMenuEntries:
+                      List.generate(
+                          state.getUsersModel.data!.length, (index) {
+                        return DropdownMenuEntry(
+                          label: state
+                              .getUsersModel.data![index].phone
+                              .toString(),
+                          value: state
+                              .getUsersModel.data![index].phone
+                              .toString(),
+                        );
+                      })
+                      ,
+                      width: 650.w(context),
+                      enableFilter: true,
+                      controller: searchPhoneController,
+                    ),
+                    SizedBox(
+                      width: 20.w(context),
+                    ),
+                    MaterialButton(
+                        height: 54.h(context),
+                        onPressed: () {
+                          if (!List.generate(state.getUsersModel.data!.length, (
+                              index) {
+                            return state
+                                .getUsersModel.data![index].phone
+                                .toString();
+                          },).contains(searchPhoneController.text)) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const AddUserView(),
+                            ),);
+                          }
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.w(context))),
+                        color: const Color(0xFF838383),
+                        child: const Text(
+                          "Add User",
+                          style:
+                          TextStyle(
+                              color: Colors.white, fontFamily: "Comfortaa"),
+                        )),
+                  ],
+                );
+              }
+              return const SizedBox();
+            },
           ),
           SizedBox(
             height: 46.h(context),
@@ -130,7 +150,7 @@ class NewBookBody extends StatelessWidget {
           ),
           Padding(
             padding:
-                EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
+            EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
             child: Row(
               children: [
                 Expanded(
@@ -141,7 +161,16 @@ class NewBookBody extends StatelessWidget {
                     readOnly: true,
                     onTap: () {
                       dateController.text =
-                          "${DateTime.now().day.toString()}/${DateTime.now().month.toString()}/${DateTime.now().year.toString()}";
+                      "${DateTime
+                          .now()
+                          .day
+                          .toString()}/${DateTime
+                          .now()
+                          .month
+                          .toString()}/${DateTime
+                          .now()
+                          .year
+                          .toString()}";
                     },
                   ),
                 ),
@@ -260,7 +289,7 @@ class NewBookBody extends StatelessWidget {
           // ),
           Padding(
             padding:
-                EdgeInsets.only(right: Platform.isWindows ? 730.w(context) : 0),
+            EdgeInsets.only(right: Platform.isWindows ? 730.w(context) : 0),
             child: Row(children: [
               Expanded(
                 child: MaterialButton(

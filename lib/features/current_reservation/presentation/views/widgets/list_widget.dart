@@ -18,101 +18,99 @@ class ListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Center(
-        child: GestureDetector(
-          onTap: () {
-            if (closed!) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    contentPadding: EdgeInsets.zero,
-                    content: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 24.w(context), vertical: 24.h(context)),
-                      width: 512.w(context),
-                      height: 674.h(context),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20.w(context)),
-                      ),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/shaghaf_logo.png",
-                            width: 84.w(context),
-                            height: 141.h(context),
-                            fit: BoxFit.fill,
-                          ),
-                          SizedBox(
-                            height: 24.h(context),
-                          ),
-                          Text(
-                            "Ahmed Mohamed",
-                            style: TextStyle(
-                              fontSize: 24.w(context),
-                              color: Colors.black,
-                              fontWeight: fontWeight,
-                              fontFamily: "Comfortaa",
-                            ),
-                          ),
-                          SizedBoxApp(
-                            h: 24.h(context),
-                          ),
-                          const Expanded(child: ListOfClose()),
-                          const Divider(
-                            color: Colors.black,
-                          ),
-                          const ItemOfListClose(
-                              text: "Full Time",
-                              text1: "3 hours",
-                              text2: "50 LE",
-                              index: 0),
-                          SizedBoxApp(
-                            h: 22.h(context),
-                          ),
-                          const ItemOfListClose(
-                              text: "Full Time",
-                              text1: "",
-                              text2: "50 LE",
-                              index: 0),
-                          SizedBoxApp(
-                            h: 22.h(context),
-                          ),
-                          MaterialButton(
-                            onPressed: () {},
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(10.w(context)),
-                            ),
-                            padding: EdgeInsets.all(16.w(context)),
-                            color: const Color(0xFF20473E).withOpacity(0.75),
-                            child: const Text(
-                              "Print",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
+      child: GestureDetector(
+        onTap: () {
+          if (closed!) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  contentPadding: EdgeInsets.zero,
+                  content: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 24.w(context), vertical: 24.h(context)),
+                    width: 512.w(context),
+                    height: 674.h(context),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.w(context)),
                     ),
-                  );
-                },
-              );
-            }
-          },
-          child: Text(
-            textAlign: TextAlign.start,
-            text,
-            style: TextStyle(
-              fontSize: 24.w(context),
-              color: isAction
-                  ? const Color(0xFFF04C29)
-                  : fontWeight == FontWeight.w600
-                      ? Colors.black
-                      : const Color(0xFF494949),
-              fontWeight: fontWeight ?? FontWeight.w400,
-              fontFamily: "Comfortaa",
-            ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/shaghaf_logo.png",
+                          width: 84.w(context),
+                          height: 141.h(context),
+                          fit: BoxFit.fill,
+                        ),
+                        SizedBox(
+                          height: 24.h(context),
+                        ),
+                        Text(
+                          "Ahmed Mohamed",
+                          style: TextStyle(
+                            fontSize: 24.w(context),
+                            color: Colors.black,
+                            fontWeight: fontWeight,
+                            fontFamily: "Comfortaa",
+                          ),
+                        ),
+                        SizedBoxApp(
+                          h: 24.h(context),
+                        ),
+                        const Expanded(child: ListOfClose()),
+                        const Divider(
+                          color: Colors.black,
+                        ),
+                        const ItemOfListClose(
+                            text: "Full Time",
+                            text1: "3 hours",
+                            text2: "50 LE",
+                            index: 0),
+                        SizedBoxApp(
+                          h: 22.h(context),
+                        ),
+                        const ItemOfListClose(
+                            text: "Full Time",
+                            text1: "",
+                            text2: "50 LE",
+                            index: 0),
+                        SizedBoxApp(
+                          h: 22.h(context),
+                        ),
+                        MaterialButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(10.w(context)),
+                          ),
+                          padding: EdgeInsets.all(16.w(context)),
+                          color: const Color(0xFF20473E).withOpacity(0.75),
+                          child: const Text(
+                            "Print",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          }
+        },
+        child: Text(
+          textAlign: TextAlign.start,
+          text,
+          style: TextStyle(
+            fontSize: 24.w(context),
+            color: isAction
+                ? const Color(0xFFF04C29)
+                : fontWeight == FontWeight.w600
+                    ? Colors.black
+                    : const Color(0xFF494949),
+            fontWeight: fontWeight ?? FontWeight.w400,
+            fontFamily: "Comfortaa",
           ),
         ),
       ),

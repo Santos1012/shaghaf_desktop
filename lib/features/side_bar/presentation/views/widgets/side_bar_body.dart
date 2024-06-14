@@ -3,7 +3,7 @@ import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/current_reservation_view.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/views/new_book_view.dart';
-import 'package:saghaf_desktop/features/requests/requests_view.dart';
+import 'package:saghaf_desktop/features/requests/presentation/views/requests_view.dart';
 import 'package:saghaf_desktop/features/side_bar/presentation/manager/side_bar_cubit.dart';
 
 

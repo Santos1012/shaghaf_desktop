@@ -174,90 +174,90 @@ class NewBookBody extends StatelessWidget {
           SizedBox(
             height: 46.h(context),
           ),
-          Padding(
-            padding:
-                EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Room",
-                      style: TextStyle(
-                          fontSize: 24.w(context),
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Comfortaa"),
-                    ),
-                    SizedBoxApp(
-                      h: 30.h(context),
-                    ),
-                    CustomDropdown<String>(
-                      closedHeaderPadding: EdgeInsets.symmetric(
-                          horizontal: 12.w(context), vertical: 18.h(context)),
-                      hintText: 'add item',
-                      headerBuilder: (context, selectedItem) {
-                        return Text(
-                          selectedItem,
-                        );
-                      },
-                      items: items,
-                      initialItem: items[0],
-                      decoration: CustomDropdownDecoration(
-                        closedBorder: Border.all(
-                            color: const Color(0xFFB1B1B1), width: 1),
-                        expandedBorder: Border.all(
-                            color: const Color(0xFFB1B1B1), width: 1),
-                      ),
-                      onChanged: (value) {},
-                    )
-                  ],
-                )),
-                SizedBox(
-                  width: 20.w(context),
-                ),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Place",
-                      style: TextStyle(
-                          fontSize: 24.w(context),
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Comfortaa"),
-                    ),
-                    SizedBoxApp(
-                      h: 30.h(context),
-                    ),
-                    CustomDropdown<String>(
-                      closedHeaderPadding: EdgeInsets.symmetric(
-                          horizontal: 12.w(context), vertical: 18.h(context)),
-                      hintText: 'add item',
-                      headerBuilder: (context, selectedItem) {
-                        return Text(
-                          selectedItem,
-                        );
-                      },
-                      items: place,
-                      initialItem: place[0],
-                      decoration: CustomDropdownDecoration(
-                        closedBorder: Border.all(
-                            color: const Color(0xFFB1B1B1), width: 1),
-                        expandedBorder: Border.all(
-                            color: const Color(0xFFB1B1B1), width: 1),
-                      ),
-                      onChanged: (value) {},
-                    )
-                  ],
-                )),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 46.h(context),
-          ),
+          // Padding(
+          //   padding:
+          //       EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
+          //   child: Row(
+          //     children: [
+          //       Expanded(
+          //           child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             "Room",
+          //             style: TextStyle(
+          //                 fontSize: 24.w(context),
+          //                 fontWeight: FontWeight.w500,
+          //                 fontFamily: "Comfortaa"),
+          //           ),
+          //           SizedBoxApp(
+          //             h: 30.h(context),
+          //           ),
+          //           CustomDropdown<String>(
+          //             closedHeaderPadding: EdgeInsets.symmetric(
+          //                 horizontal: 12.w(context), vertical: 18.h(context)),
+          //             hintText: 'add item',
+          //             headerBuilder: (context, selectedItem) {
+          //               return Text(
+          //                 selectedItem,
+          //               );
+          //             },
+          //             items: items,
+          //             initialItem: items[0],
+          //             decoration: CustomDropdownDecoration(
+          //               closedBorder: Border.all(
+          //                   color: const Color(0xFFB1B1B1), width: 1),
+          //               expandedBorder: Border.all(
+          //                   color: const Color(0xFFB1B1B1), width: 1),
+          //             ),
+          //             onChanged: (value) {},
+          //           )
+          //         ],
+          //       )),
+          //       SizedBox(
+          //         width: 20.w(context),
+          //       ),
+          //       Expanded(
+          //           child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             "Place",
+          //             style: TextStyle(
+          //                 fontSize: 24.w(context),
+          //                 fontWeight: FontWeight.w500,
+          //                 fontFamily: "Comfortaa"),
+          //           ),
+          //           SizedBoxApp(
+          //             h: 30.h(context),
+          //           ),
+          //           CustomDropdown<String>(
+          //             closedHeaderPadding: EdgeInsets.symmetric(
+          //                 horizontal: 12.w(context), vertical: 18.h(context)),
+          //             hintText: 'add item',
+          //             headerBuilder: (context, selectedItem) {
+          //               return Text(
+          //                 selectedItem,
+          //               );
+          //             },
+          //             items: place,
+          //             initialItem: place[0],
+          //             decoration: CustomDropdownDecoration(
+          //               closedBorder: Border.all(
+          //                   color: const Color(0xFFB1B1B1), width: 1),
+          //               expandedBorder: Border.all(
+          //                   color: const Color(0xFFB1B1B1), width: 1),
+          //             ),
+          //             onChanged: (value) {},
+          //           )
+          //         ],
+          //       )),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 46.h(context),
+          // ),
           Padding(
             padding:
                 EdgeInsets.only(right: Platform.isWindows ? 730.w(context) : 0),

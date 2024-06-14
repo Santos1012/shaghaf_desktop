@@ -191,6 +191,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                 text6: "Action",
                 color: Colors.grey.withOpacity(0.1),
               ),
+              const Divider(),
               if (state is GetReservationsLoading) ...[
                 Container(
                     width: Platform.isWindows
@@ -261,8 +262,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               //  state.getReservationsList[index].start!
                               //     .toIso8601String()
                               //     .substring(11, 19),
-                              text4:
-                                  "${a.hour}h ${a.minute}m ${a.second}s",
+                              text4: "${a.hour}h ${a.minute}m ${a.second}s",
                               text5: "App",
                               text6:
                                   state.getReservationsList[index].paid == false
@@ -290,7 +290,8 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                                   setState(() {});
                                 },
                               ),
-                            )
+                            ),
+                          const Divider()
                         ],
                       );
                     },

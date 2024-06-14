@@ -139,7 +139,7 @@ class _LoginBodyState extends State<LoginBody> {
                   builder: (context, state) {
                     if (state is AuthLoading) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(color: Colors.grey,),
                       );
                     } else if (state is AuthError) {
                       return TextButton(

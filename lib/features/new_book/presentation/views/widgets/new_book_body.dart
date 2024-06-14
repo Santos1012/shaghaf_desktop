@@ -137,6 +137,9 @@ class _NewBookBodyState extends State<NewBookBody> {
                   ],
                 );
               }
+              if (state is GetUsersLoading) {
+                return const Center(child: CircularProgressIndicator(color: Colors.grey,));
+              }
               return const SizedBox();
             },
           ),
@@ -314,7 +317,7 @@ class _NewBookBodyState extends State<NewBookBody> {
                   },
                   builder: (context, state) {
                     if (state is UserBookLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator(color: Colors.grey,));
                     } else if (state is UserBookError) {
                       return Column(
                         children: [

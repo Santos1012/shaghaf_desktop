@@ -31,8 +31,9 @@ class ListRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 20.w(context)),
       width: Platform.isWindows
-          ? MediaQuery.of(context).size.width * 5 / 6
+          ? MediaQuery.of(context).size.width * 5.5 / 6
           : double.infinity,
       color: color,
       height: 80.h(context),
@@ -42,6 +43,7 @@ class ListRow extends StatelessWidget {
             text: text0,
             fontWeight: FontWeight.w600,
           ),
+          SizedBox(width: 30.w(context),),
           ListWidget(
             text: text1,
             fontWeight: FontWeight.w600,

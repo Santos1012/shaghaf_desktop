@@ -14,13 +14,17 @@ class RequestsView extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           RequestCubit(sl<RequestRepoImplementation>())..getAllMembers(),
-      child: Padding(
-          padding: EdgeInsets.only(
-            bottom: 15.w(context),
-            right: 15.w(context),
-            left: 15.w(context),
-          ),
-          child: const RequestsBody()),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Padding(
+            padding: EdgeInsets.only(
+              bottom: 15.w(context),
+              right: 15.w(context),
+              left: 15.w(context),
+              
+            ),
+            child: const RequestsBody()),
+      ),
     );
   }
 }

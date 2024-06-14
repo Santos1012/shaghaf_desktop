@@ -8,7 +8,7 @@ import '../models/reservations_model/reservations_model.dart';
 abstract class GetUsersRepo {
   GetUsersRepo();
   Future<Either<Failures, GetUsersModel>> getAllUsers(
-      {required int page, required int limit});
+      {required int page, required int limit, required String userType});
   Future<Either<Failures, CreateUserModel>> createUsers({
     required String username,
     required String birthdate,

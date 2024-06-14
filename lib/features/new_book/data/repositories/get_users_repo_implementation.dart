@@ -16,10 +16,10 @@ class GetUsersRepoImplementation extends GetUsersRepo {
 
   @override
   Future<Either<Failures, GetUsersModel>> getAllUsers(
-      {required int page, required int limit}) async {
+      {required int page, required int limit,required String userType}) async {
     try {
       final res = await apiService.getData(
-          endPoint: '/api/users?userType=user&page=$page&limit=$limit');
+          endPoint: '/api/users?userType=$userType&page=$page&limit=$limit');
       if (res['message'] == "success") {
         return right(
           GetUsersModel.fromJson(res),

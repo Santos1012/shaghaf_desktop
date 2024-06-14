@@ -14,7 +14,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
   List<DatumGetAllUsers>? r1;
   Future<void> getAllUsers() async {
     emit(GetUsersLoading());
-    final result = await getUsersRepo.getAllUsers(page: 1, limit: 100);
+    final result = await getUsersRepo.getAllUsers(page: 1, limit: 100,userType: "user");
     result.fold(
       (l) {
         log(l.errorMessage);
@@ -31,7 +31,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
   Future<void> getReservations() async {
     emit(GetReservationsLoading());
     final result = await getUsersRepo.getAllReservations();
-    final result1 = await getUsersRepo.getAllUsers(page: 1, limit: 100);
+    final result1 = await getUsersRepo.getAllUsers(page: 1, limit: 100,userType: "");
     result.fold(
       (l) {
         log(l.errorMessage);
@@ -97,7 +97,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
   Future<void> getAllUsersPagination({bool add = false}) async {
     emit(GetUsersLoading());
 
-    final result = await getUsersRepo.getAllUsers(page: pageNumber, limit: 10);
+    final result = await getUsersRepo.getAllUsers(page: pageNumber, limit: 10,userType: "user");
     result.fold(
       (l) {
         log(l.errorMessage);

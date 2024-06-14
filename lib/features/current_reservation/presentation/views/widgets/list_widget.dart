@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 
@@ -59,7 +57,8 @@ class ListWidget extends StatelessWidget {
                             ),
                           ),
                           SizedBoxApp(
-                            h: 24.h(context),),
+                            h: 24.h(context),
+                          ),
                           const Expanded(child: ListOfClose()),
                           const Divider(
                             color: Colors.black,
@@ -82,15 +81,16 @@ class ListWidget extends StatelessWidget {
                           ),
                           MaterialButton(
                             onPressed: () {},
-                            shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.w(context)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(10.w(context)),
                             ),
                             padding: EdgeInsets.all(16.w(context)),
-                            child: Text(
+                            color: const Color(0xFF20473E).withOpacity(0.75),
+                            child: const Text(
                               "Print",
                               style: TextStyle(color: Colors.white),
                             ),
-                            color: const Color(0xFF20473E).withOpacity(0.75),
                           )
                         ],
                       ),
@@ -105,7 +105,11 @@ class ListWidget extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 24.w(context),
-              color: isAction ? const Color(0xFFF04C29) : fontWeight==FontWeight.w600?Colors.black:Color(0xFF494949),
+              color: isAction
+                  ? const Color(0xFFF04C29)
+                  : fontWeight == FontWeight.w600
+                      ? Colors.black
+                      : const Color(0xFF494949),
               fontWeight: fontWeight ?? FontWeight.w400,
               fontFamily: "Comfortaa",
             ),

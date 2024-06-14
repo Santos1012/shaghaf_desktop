@@ -137,15 +137,20 @@ class _LoginBodyState extends State<LoginBody> {
                     }
                   },
                   builder: (context, state) {
-                    if(state is AuthLoading){
-                      return const Center(child: CircularProgressIndicator(),);
-                    }else if(state is AuthError){
-                      return TextButton(onPressed: () {
-                        BlocProvider.of<AuthCubit>(context).authLogin(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      }, child: Text("try again"),);
+                    if (state is AuthLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is AuthError) {
+                      return TextButton(
+                        onPressed: () {
+                          BlocProvider.of<AuthCubit>(context).authLogin(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        },
+                        child: const Text("try again"),
+                      );
                     }
                     return GestureDetector(
                       onTap: () {

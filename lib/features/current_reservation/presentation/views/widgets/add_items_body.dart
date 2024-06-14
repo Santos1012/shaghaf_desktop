@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
@@ -13,7 +12,7 @@ class AddItemsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> _items = ['tea', 'coffee', 'water', 'milk'];
+    final List<String> items = ['tea', 'coffee', 'water', 'milk'];
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: SingleChildScrollView(
@@ -57,26 +56,25 @@ class AddItemsBody extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Expanded(
-                        child:CustomDropdown<String>(
-                          hintText: 'add item',
-                          headerBuilder: (context, selectedItem) {
-                            return Text(
-                              selectedItem,
-                            );
-                          },
-                          items: _items,
-                          initialItem: _items[0],
-                          decoration: CustomDropdownDecoration(
-                            closedBorder: Border.all(
-                                color: const Color(0xFFB1B1B1), width: 1),
-                            expandedBorder: Border.all(
-                                color: const Color(0xFFB1B1B1), width: 1),
-                          ),
-                          onChanged: (value) {
-                            log('changing value to: $value');
-                          },
-                        )
-                      ),
+                          child: CustomDropdown<String>(
+                        hintText: 'add item',
+                        headerBuilder: (context, selectedItem) {
+                          return Text(
+                            selectedItem,
+                          );
+                        },
+                        items: items,
+                        initialItem: items[0],
+                        decoration: CustomDropdownDecoration(
+                          closedBorder: Border.all(
+                              color: const Color(0xFFB1B1B1), width: 1),
+                          expandedBorder: Border.all(
+                              color: const Color(0xFFB1B1B1), width: 1),
+                        ),
+                        onChanged: (value) {
+                          log('changing value to: $value');
+                        },
+                      )),
                       SizedBoxApp(
                         w: 25.w(context),
                       ),

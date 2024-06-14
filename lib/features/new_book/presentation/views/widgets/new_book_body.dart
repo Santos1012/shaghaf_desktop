@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
@@ -5,19 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
+import 'package:saghaf_desktop/features/new_book/presentation/views/add_user_view.dart';
 
 class NewBookBody extends StatelessWidget {
   const NewBookBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> _items = [
+    final List<String> items = [
       'smoking room',
       'gaming room',
       'edu room',
       'other'
     ];
-    final List<String> _place = [
+    final List<String> place = [
       'Roxy',
       'Masr Elgededa’',
     ];
@@ -44,7 +46,64 @@ class NewBookBody extends StatelessWidget {
           SizedBox(
             height: 46.h(context),
           ),
+          Text(
+            "Select User by Phone number",
+            style: TextStyle(
+                fontSize: 24.w(context),
+                fontWeight: FontWeight.w500,
+                fontFamily: "Comfortaa"),
+          ),
+          SizedBox(
+            height: 32.h(context),
+          ),
           Row(
+            children: [
+              DropdownMenu(
+                onSelected: (value) {
+                  log(value.toString());
+                },
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(
+                    value: "01063557665",
+                    label: "01063557665",
+                  ),
+                  DropdownMenuEntry(
+                    value: "01063557665",
+                    label: "01001819452",
+                  ),
+                  DropdownMenuEntry(
+                    value: "01063557665",
+                    label: "01144399555",
+                  ),
+                ],
+                width: 650.w(context),
+                enableFilter: true,
+              ),
+              SizedBox(
+                width: 20.w(context),
+              ),
+              MaterialButton(
+                  height: 54.h(context),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const AddUserView(),
+                    ));
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.w(context))),
+                  color: const Color(0xFF838383),
+                  child: const Text(
+                    "Add User",
+                    style:
+                        TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
+                  )),
+            ],
+          ),
+          SizedBox(
+            height: 46.h(context),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: AppCustomTextField(
@@ -70,7 +129,8 @@ class NewBookBody extends StatelessWidget {
             height: 48.h(context),
           ),
           Padding(
-            padding: EdgeInsets.only(right: Platform.isWindows ?415.w(context):0),
+            padding:
+                EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
             child: Row(
               children: [
                 Expanded(
@@ -115,12 +175,13 @@ class NewBookBody extends StatelessWidget {
             height: 46.h(context),
           ),
           Padding(
-            padding: EdgeInsets.only(right:Platform.isWindows ? 415.w(context):0),
+            padding:
+                EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
             child: Row(
               children: [
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Room",
@@ -133,15 +194,16 @@ class NewBookBody extends StatelessWidget {
                       h: 30.h(context),
                     ),
                     CustomDropdown<String>(
-                      closedHeaderPadding: EdgeInsets.symmetric(horizontal: 12.w(context),vertical: 18.h(context)),
+                      closedHeaderPadding: EdgeInsets.symmetric(
+                          horizontal: 12.w(context), vertical: 18.h(context)),
                       hintText: 'add item',
                       headerBuilder: (context, selectedItem) {
                         return Text(
                           selectedItem,
                         );
                       },
-                      items: _items,
-                      initialItem: _items[0],
+                      items: items,
+                      initialItem: items[0],
                       decoration: CustomDropdownDecoration(
                         closedBorder: Border.all(
                             color: const Color(0xFFB1B1B1), width: 1),
@@ -157,38 +219,39 @@ class NewBookBody extends StatelessWidget {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Place",
-                          style: TextStyle(
-                              fontSize: 24.w(context),
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Comfortaa"),
-                        ),
-                        SizedBoxApp(
-                          h: 30.h(context),
-                        ),
-                        CustomDropdown<String>(
-                          closedHeaderPadding: EdgeInsets.symmetric(horizontal: 12.w(context),vertical: 18.h(context)),
-                          hintText: 'add item',
-                          headerBuilder: (context, selectedItem) {
-                            return Text(
-                              selectedItem,
-                            );
-                          },
-                          items: _place,
-                          initialItem: _place[0],
-                          decoration: CustomDropdownDecoration(
-                            closedBorder: Border.all(
-                                color: const Color(0xFFB1B1B1), width: 1),
-                            expandedBorder: Border.all(
-                                color: const Color(0xFFB1B1B1), width: 1),
-                          ),
-                          onChanged: (value) {},
-                        )
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Place",
+                      style: TextStyle(
+                          fontSize: 24.w(context),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Comfortaa"),
+                    ),
+                    SizedBoxApp(
+                      h: 30.h(context),
+                    ),
+                    CustomDropdown<String>(
+                      closedHeaderPadding: EdgeInsets.symmetric(
+                          horizontal: 12.w(context), vertical: 18.h(context)),
+                      hintText: 'add item',
+                      headerBuilder: (context, selectedItem) {
+                        return Text(
+                          selectedItem,
+                        );
+                      },
+                      items: place,
+                      initialItem: place[0],
+                      decoration: CustomDropdownDecoration(
+                        closedBorder: Border.all(
+                            color: const Color(0xFFB1B1B1), width: 1),
+                        expandedBorder: Border.all(
+                            color: const Color(0xFFB1B1B1), width: 1),
+                      ),
+                      onChanged: (value) {},
+                    )
+                  ],
+                )),
               ],
             ),
           ),
@@ -196,7 +259,8 @@ class NewBookBody extends StatelessWidget {
             height: 46.h(context),
           ),
           Padding(
-            padding: EdgeInsets.only(right: Platform.isWindows ?  730.w(context):0),
+            padding:
+                EdgeInsets.only(right: Platform.isWindows ? 730.w(context) : 0),
             child: Row(children: [
               Expanded(
                 child: MaterialButton(

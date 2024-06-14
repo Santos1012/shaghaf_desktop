@@ -25,7 +25,8 @@ class RequestsListRow extends StatelessWidget {
       required this.text4,
       required this.text5,
       this.hasAction = false,
-      required this.color, this.header=false});
+      required this.color,
+      this.header = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,65 +34,72 @@ class RequestsListRow extends StatelessWidget {
       children: [
         Expanded(
           child: SizedBox(
-            width:Platform.isWindows ?900.w(context):double.infinity,
+            width: Platform.isWindows ? 900.w(context) : double.infinity,
             child: Row(
               children: [
                 ListWidget(
                   text: text0,
-                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
                 ListWidget(
                   text: text1,
-                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
                 ListWidget(
                   text: text2,
-                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
                 ListWidget(
                   text: text3,
-                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
                 ListWidget(
                   text: text4,
-                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
                 ListWidget(
                   text: text5,
-                  fontWeight: header! ? FontWeight.w800:FontWeight.w400,
+                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
               ],
             ),
           ),
         ),
-          header!?const SizedBox.shrink():SingleChildScrollView(
-            child: Row(
-              children: [
-                Container(
-                  width: 60.w(context),
-                  height: 60.h(context),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: const Color(0xFF20473F), width: 2),
+        header!
+            ? const SizedBox.shrink()
+            : SingleChildScrollView(
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60.w(context),
+                      height: 60.h(context),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: const Color(0xFF20473F), width: 2),
+                      ),
+                      child: Icon(
+                        Icons.done,
+                        size: 30.w(context),
+                      ),
                     ),
-                    child: Icon(Icons.done,size: 30.w(context),),
-                    ),
-                const SizedBox(width: 20),
-                Container(
-                    width: 60.w(context),
-                    height: 60.h(context),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: const Color(0xFFf04C29), width: 2),
-                    ),
-                    child:  Icon(
-                      Icons.close,
-                      size: 30.w(context),
-                      color: Color(0xFFF04C29),
-                    )),
-              ],
-            ),
-          )
+                    const SizedBox(width: 20),
+                    Container(
+                        width: 60.w(context),
+                        height: 60.h(context),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: const Color(0xFFf04C29), width: 2),
+                        ),
+                        child: Icon(
+                          Icons.close,
+                          size: 30.w(context),
+                          color: const Color(0xFFF04C29),
+                        )),
+                  ],
+                ),
+              )
       ],
     );
   }

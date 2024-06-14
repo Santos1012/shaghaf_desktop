@@ -6,7 +6,7 @@ class AppCustomTextField extends StatelessWidget {
   final String hint;
   final bool? isSearch;
   final String textName;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool? readOnly;
   final void Function()? onTap;
   final Color? color;
@@ -17,7 +17,7 @@ class AppCustomTextField extends StatelessWidget {
       required this.hint,
       this.isSearch = false,
       required this.textName,
-      required this.controller,
+       this.controller,
       this.readOnly,
       this.onTap, this.color, this.phone=false});
   @override

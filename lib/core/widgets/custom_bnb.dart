@@ -1,5 +1,3 @@
-
-
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/current_reservation_view.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/views/new_book_view.dart';
@@ -35,7 +33,7 @@ class _CustomBNBState extends State<CustomBNB> {
         extendBody: true,
         body: screens[currentIndex],
         bottomNavigationBar: Container(
-          color: Color(0xFF2E2E2F),
+          color: const Color(0xFF2E2E2F),
           width: double.infinity,
           height: 64.h(context),
           child: Row(
@@ -57,14 +55,17 @@ class _CustomBNBState extends State<CustomBNB> {
                             ? const Color(0xFFFFCC0A)
                             : Colors.white,
                       ),
-                      (currentIndex == index)?Container(
-                        width: 21.w(context),
-                        height: 10.h(context),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFCC0A),
-                          borderRadius: BorderRadius.circular(20.w(context)),
-                        ),
-                      ):const SizedBox.shrink()
+                      (currentIndex == index)
+                          ? Container(
+                              width: 21.w(context),
+                              height: 10.h(context),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFCC0A),
+                                borderRadius:
+                                    BorderRadius.circular(20.w(context)),
+                              ),
+                            )
+                          : const SizedBox.shrink()
                     ],
                   ),
                 ),
@@ -72,7 +73,6 @@ class _CustomBNBState extends State<CustomBNB> {
             ),
           ),
         ),
-
       ),
     );
   }

@@ -21,7 +21,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
         emit(GetUsersError(l.errorMessage));
       },
       (r) {
-        log(r.message.toString());
+        // log(r.message.toString());
         r1 = r.data ?? [];
         emit(GetUsersSuccess(r));
       },
@@ -41,7 +41,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
         result1.fold(
           (l) {},
           (r2) {
-            log(r.toString());
+            // log(r.toString());
             emit(GetReservationsSuccess(r, r2.data));
           },
         );
@@ -69,7 +69,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
         emit(CreateUserError(l.errorMessage));
       },
       (r) {
-        log(r.message.toString());
+        // log(r.message.toString());
         emit(CreateUserSuccess(r));
       },
     );

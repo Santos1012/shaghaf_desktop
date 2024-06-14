@@ -128,7 +128,6 @@ class _LoginBodyState extends State<LoginBody> {
                 const SizedBoxApp(h: 20),
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
-                    print(state);
                     if (state is AuthSuccess) {
                       if (Platform.isAndroid) {
                         GoRouter.of(context).go(Routers.newBookMobile);

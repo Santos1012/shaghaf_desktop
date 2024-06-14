@@ -95,7 +95,7 @@ class RequestsBody extends StatelessWidget {
                   },
                 );
               }
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             },
           )
         ],

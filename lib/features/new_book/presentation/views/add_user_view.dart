@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -117,12 +117,12 @@ class _AddUserViewState extends State<AddUserView> {
                               firstDate: DateTime(DateTime.now().year - 70),
                               lastDate: DateTime(DateTime.now().year + 5),
                             ) as DateTime;
-                            log(x.toString());
-                            log(x.runtimeType.toString());
+                            // log(x.toString());
+                            // log(x.runtimeType.toString());
                             setState(() {
                               dateController.text = x.toString();
                               selectedDate = x.toString();
-                              log(selectedDate.toString());
+                              // log(selectedDate.toString());
                             });
                           },
                           icon: Icons.calendar_month,
@@ -150,9 +150,7 @@ class _AddUserViewState extends State<AddUserView> {
                   Row(children: [
                     Expanded(
                       child: BlocConsumer<GetUsersCubit, GetUsersState>(
-                        listener: (context, state) {
-                          print(state);
-                        },
+                        listener: (context, state) {},
                         builder: (context, state) {
                           return MaterialButton(
                               height: 54.h(context),

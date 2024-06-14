@@ -20,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError(l.errorMessage));
       },
       (r) {
-        log(r.message.toString());
+        // log(r.message.toString());
         emit(AuthSuccess(r));
       },
     );

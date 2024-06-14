@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -219,9 +219,15 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               state.getReservationsList[index].user?.id);
                       DateTime x = DateTime.parse(
                           state.getReservationsList[index].start.toString());
-                      int hTimer = DateTime.now().hour - x.hour;
-                      int mTimer = DateTime.now().minute - x.minute;
-                      log(x.toString());
+
+                      // int hTimer = DateTime.now().hour - x.hour;
+                      DateTime a = DateTime.now().subtract(Duration(
+                          days: x.day,
+                          hours: x.hour,
+                          minutes: x.minute,
+                          seconds: x.second));
+                      // int mTimer = DateTime.now().minute - x.minute;
+                      // log(a.toString());
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -255,7 +261,8 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               //  state.getReservationsList[index].start!
                               //     .toIso8601String()
                               //     .substring(11, 19),
-                              text4: "$hTimer h $mTimer m",
+                              text4:
+                                  "${a.hour}h ${a.minute}m ${a.second}s",
                               text5: "App",
                               text6:
                                   state.getReservationsList[index].paid == false

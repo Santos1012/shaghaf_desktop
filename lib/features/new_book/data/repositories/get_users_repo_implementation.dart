@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -53,7 +53,7 @@ class GetUsersRepoImplementation extends GetUsersRepo {
         for (var element in res["data"]) {
           resList.add(ReservationsModel.fromJson(element));
         }
-        log(resList.toString());
+        // log(resList.toString());
         return right(
           resList,
         );
@@ -128,10 +128,10 @@ class GetUsersRepoImplementation extends GetUsersRepo {
         "start": bookDate
       }, endPoint: '/api/members/book');
       if (res['message'] == "success") {
-        log(res.toString());
+        // log(res.toString());
         return right(null);
       } else {
-        log(res['message']);
+        // log(res['message']);
         return left(
           ServerFailure(res['message']),
         );

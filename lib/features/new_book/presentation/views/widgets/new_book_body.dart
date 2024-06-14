@@ -306,7 +306,12 @@ class _NewBookBodyState extends State<NewBookBody> {
             child: Row(children: [
               Expanded(
                 child: BlocConsumer<GetUsersCubit, GetUsersState>(
-                  listener: (context, state) {},
+                  listener: (context, state) {
+                    if (state is UserBookSuccess) {
+                      context.read<SideBarCubit>().changeIndex(1);
+                      setState(() {});
+                    }
+                  },
                   builder: (context, state) {
                     if (state is UserBookLoading) {
                       return const Center(child: CircularProgressIndicator());
@@ -344,10 +349,6 @@ class _NewBookBodyState extends State<NewBookBody> {
                           context.read<GetUsersCubit>().userBook(
                               userId: userId ?? "",
                               bookDate: selectedDateTime.toString());
-                          if (state is UserBookSuccess) {
-                            context.read<SideBarCubit>().changeIndex(1);
-                            setState(() {});
-                          }
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.w(context))),

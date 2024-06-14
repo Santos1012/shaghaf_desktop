@@ -11,7 +11,9 @@ class RequestRepoImplementation extends RequestRepo {
   RequestRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, RequestModel>> getAllMembers({required int page,}) async {
+  Future<Either<Failures, RequestModel>> getAllMembers({
+    required int page,
+  }) async {
     try {
       final res = await apiService.getData(
           endPoint: '/api/members/book?$page=1&limit=10');

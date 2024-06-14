@@ -9,9 +9,18 @@ import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/manager/get_users_cubit.dart';
 import 'package:saghaf_desktop/features/new_book/presentation/views/add_user_view.dart';
 
-class NewBookBody extends StatelessWidget {
+import '../../../../side_bar/presentation/manager/side_bar_cubit.dart';
+
+class NewBookBody extends StatefulWidget {
   const NewBookBody({super.key});
 
+  @override
+  State<NewBookBody> createState() => _NewBookBodyState();
+}
+
+class _NewBookBodyState extends State<NewBookBody> {
+  DateTime selectedDateTime = DateTime.now();
+  String? userId = "";
   @override
   Widget build(BuildContext context) {
     // final List<String> items = [
@@ -60,28 +69,39 @@ class NewBookBody extends StatelessWidget {
           ),
           BlocConsumer<GetUsersCubit, GetUsersState>(
             listener: (context, state) {},
-            buildWhen:(previous, current) => current is GetUsersSuccess,
+            buildWhen: (previous, current) => current is GetUsersSuccess,
             builder: (context, state) {
               if (state is GetUsersSuccess) {
                 return Row(
                   children: [
                     DropdownMenu(
                       onSelected: (value) {
+                        userId = value!.id;
+                        nameController.text = value.username ?? "";
+                        phoneController.text = value.phone ?? "";
+                        final currentTime = DateTime.now();
+                        dateController.text =
+                            "${currentTime.day.toString()}/${currentTime.month.toString()}/${currentTime.year.toString()}";
+                        final hour = (currentTime.hour < 10)
+                            ? '0${currentTime.hour}'
+                            : '${currentTime.hour}';
+                        final minute = (currentTime.minute < 10)
+                            ? '0${currentTime.minute}'
+                            : '${currentTime.minute}';
+                        final period = (currentTime.hour < 12) ? 'AM' : 'PM';
+                        final timeString = '$hour:$minute $period';
+                        timeController.text = timeString;
+                        selectedDateTime = DateTime.now();
                         log(value.toString());
                       },
-                      dropdownMenuEntries:
-                      List.generate(
+                      dropdownMenuEntries: List.generate(
                           state.getUsersModel.data!.length, (index) {
                         return DropdownMenuEntry(
-                          label: state
-                              .getUsersModel.data![index].phone
-                              .toString(),
-                          value: state
-                              .getUsersModel.data![index].phone
-                              .toString(),
+                          label:
+                              state.getUsersModel.data![index].phone.toString(),
+                          value: state.getUsersModel.data![index],
                         );
-                      })
-                      ,
+                      }),
                       width: 650.w(context),
                       enableFilter: true,
                       controller: searchPhoneController,
@@ -92,15 +112,18 @@ class NewBookBody extends StatelessWidget {
                     MaterialButton(
                         height: 54.h(context),
                         onPressed: () {
-                          if (!List.generate(state.getUsersModel.data!.length, (
-                              index) {
-                            return state
-                                .getUsersModel.data![index].phone
-                                .toString();
-                          },).contains(searchPhoneController.text)) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const AddUserView(),
-                            ),);
+                          if (!List.generate(
+                            state.getUsersModel.data!.length,
+                            (index) {
+                              return state.getUsersModel.data![index].phone
+                                  .toString();
+                            },
+                          ).contains(searchPhoneController.text)) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const AddUserView(),
+                              ),
+                            );
                           }
                         },
                         shape: RoundedRectangleBorder(
@@ -108,8 +131,7 @@ class NewBookBody extends StatelessWidget {
                         color: const Color(0xFF838383),
                         child: const Text(
                           "Add User",
-                          style:
-                          TextStyle(
+                          style: TextStyle(
                               color: Colors.white, fontFamily: "Comfortaa"),
                         )),
                   ],
@@ -149,7 +171,7 @@ class NewBookBody extends StatelessWidget {
           ),
           Padding(
             padding:
-            EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
+                EdgeInsets.only(right: Platform.isWindows ? 415.w(context) : 0),
             child: Row(
               children: [
                 Expanded(
@@ -160,16 +182,7 @@ class NewBookBody extends StatelessWidget {
                     readOnly: true,
                     onTap: () {
                       dateController.text =
-                      "${DateTime
-                          .now()
-                          .day
-                          .toString()}/${DateTime
-                          .now()
-                          .month
-                          .toString()}/${DateTime
-                          .now()
-                          .year
-                          .toString()}";
+                          "${DateTime.now().day.toString()}/${DateTime.now().month.toString()}/${DateTime.now().year.toString()}";
                     },
                   ),
                 ),
@@ -193,6 +206,7 @@ class NewBookBody extends StatelessWidget {
                       final period = (currentTime.hour < 12) ? 'AM' : 'PM';
                       final timeString = '$hour:$minute $period';
                       timeController.text = timeString;
+                      selectedDateTime = DateTime.now();
                     },
                   ),
                 ),
@@ -288,20 +302,63 @@ class NewBookBody extends StatelessWidget {
           // ),
           Padding(
             padding:
-            EdgeInsets.only(right: Platform.isWindows ? 730.w(context) : 0),
+                EdgeInsets.only(right: Platform.isWindows ? 730.w(context) : 0),
             child: Row(children: [
               Expanded(
-                child: MaterialButton(
-                    height: 54.h(context),
-                    onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.w(context))),
-                    color: const Color(0xFF20473F),
-                    child: const Text(
-                      "Done",
-                      style: TextStyle(
-                          color: Colors.white, fontFamily: "Comfortaa"),
-                    )),
+                child: BlocConsumer<GetUsersCubit, GetUsersState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    if (state is UserBookLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is UserBookError) {
+                      return Column(
+                        children: [
+                          MaterialButton(
+                              height: 54.h(context),
+                              onPressed: () {
+                                context.read<GetUsersCubit>().userBook(
+                                    userId: userId ?? "",
+                                    bookDate: selectedDateTime.toString());
+                                if (state is UserBookSuccess) {
+                                  context.read<SideBarCubit>().changeIndex(1);
+                                  setState(() {});
+                                }
+                              },
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(10.w(context))),
+                              color: const Color(0xFF20473F),
+                              child: const Text(
+                                "Done",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Comfortaa"),
+                              )),
+                          Text(state.errorMessage),
+                        ],
+                      );
+                    }
+                    return MaterialButton(
+                        height: 54.h(context),
+                        onPressed: () {
+                          context.read<GetUsersCubit>().userBook(
+                              userId: userId ?? "",
+                              bookDate: selectedDateTime.toString());
+                          if (state is UserBookSuccess) {
+                            context.read<SideBarCubit>().changeIndex(1);
+                            setState(() {});
+                          }
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.w(context))),
+                        color: const Color(0xFF20473F),
+                        child: const Text(
+                          "Done",
+                          style: TextStyle(
+                              color: Colors.white, fontFamily: "Comfortaa"),
+                        ));
+                  },
+                ),
               ),
               SizedBox(
                 width: 20.w(context),

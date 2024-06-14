@@ -22,7 +22,8 @@ class AppCustomTextField extends StatelessWidget {
       this.readOnly,
       this.onTap,
       this.color,
-      this.phone = false, this.icon});
+      this.phone = false,
+      this.icon});
 
   @override
   Widget build(BuildContext context) {

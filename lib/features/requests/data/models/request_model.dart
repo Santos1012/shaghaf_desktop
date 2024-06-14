@@ -10,16 +10,22 @@ class RequestModel {
   });
 
   factory RequestModel.fromJson(Map<String, dynamic> json) => RequestModel(
-    message: json["message"],
-    pagination: json["pagination"] == null ? null : Pagination.fromJson(json["pagination"]),
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
-  );
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? null
+            : Pagination.fromJson(json["pagination"]),
+        data: json["data"] == null
+            ? []
+            : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "message": message,
-    "pagination": pagination?.toJson(),
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-  };
+        "message": message,
+        "pagination": pagination?.toJson(),
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
 }
 
 class Datum {
@@ -50,32 +56,36 @@ class Datum {
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["_id"],
-    member: json["member"] == null ? null : Member.fromJson(json["member"]),
-    user: json["user"] == null ? null : User.fromJson(json["user"]),
-    paid: json["paid"],
-    totalPrice: json["totalPrice"],
-    pointDiscount: json["pointDiscount"],
-    stuffDiscount: json["stuffDiscount"],
-    start: json["start"] == null ? null : DateTime.parse(json["start"]),
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    v: json["__v"],
-  );
+        id: json["_id"],
+        member: json["member"] == null ? null : Member.fromJson(json["member"]),
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        paid: json["paid"],
+        totalPrice: json["totalPrice"],
+        pointDiscount: json["pointDiscount"],
+        stuffDiscount: json["stuffDiscount"],
+        start: json["start"] == null ? null : DateTime.parse(json["start"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "_id": id,
-    "member": member?.toJson(),
-    "user": user?.toJson(),
-    "paid": paid,
-    "totalPrice": totalPrice,
-    "pointDiscount": pointDiscount,
-    "stuffDiscount": stuffDiscount,
-    "start": start?.toIso8601String(),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-  };
+        "_id": id,
+        "member": member?.toJson(),
+        "user": user?.toJson(),
+        "paid": paid,
+        "totalPrice": totalPrice,
+        "pointDiscount": pointDiscount,
+        "stuffDiscount": stuffDiscount,
+        "start": start?.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "__v": v,
+      };
 }
 
 class Member {
@@ -102,28 +112,37 @@ class Member {
   });
 
   factory Member.fromJson(Map<String, dynamic> json) => Member(
-    id: json["_id"],
-    title: json["title"],
-    details: json["details"] == null ? [] : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x))),
-    price: json["price"],
-    duration: json["duration"],
-    durationType: json["durationType"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    v: json["__v"],
-  );
+        id: json["_id"],
+        title: json["title"],
+        details: json["details"] == null
+            ? []
+            : List<Detail>.from(
+                json["details"]!.map((x) => Detail.fromJson(x))),
+        price: json["price"],
+        duration: json["duration"],
+        durationType: json["durationType"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "_id": id,
-    "title": title,
-    "details": details == null ? [] : List<dynamic>.from(details!.map((x) => x.toJson())),
-    "price": price,
-    "duration": duration,
-    "durationType": durationType,
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-  };
+        "_id": id,
+        "title": title,
+        "details": details == null
+            ? []
+            : List<dynamic>.from(details!.map((x) => x.toJson())),
+        "price": price,
+        "duration": duration,
+        "durationType": durationType,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "__v": v,
+      };
 }
 
 class Detail {
@@ -136,14 +155,14 @@ class Detail {
   });
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-    title: json["title"],
-    id: json["_id"],
-  );
+        title: json["title"],
+        id: json["_id"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "title": title,
-    "_id": id,
-  };
+        "title": title,
+        "_id": id,
+      };
 }
 
 class User {
@@ -158,16 +177,16 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["_id"],
-    username: json["username"],
-    email: json["email"],
-  );
+        id: json["_id"],
+        username: json["username"],
+        email: json["email"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "_id": id,
-    "username": username,
-    "email": email,
-  };
+        "_id": id,
+        "username": username,
+        "email": email,
+      };
 }
 
 class Pagination {
@@ -182,14 +201,14 @@ class Pagination {
   });
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-    currentPage: json["currentPage"],
-    resultCount: json["resultCount"],
-    totalPages: json["totalPages"],
-  );
+        currentPage: json["currentPage"],
+        resultCount: json["resultCount"],
+        totalPages: json["totalPages"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "currentPage": currentPage,
-    "resultCount": resultCount,
-    "totalPages": totalPages,
-  };
+        "currentPage": currentPage,
+        "resultCount": resultCount,
+        "totalPages": totalPages,
+      };
 }

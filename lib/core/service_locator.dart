@@ -12,7 +12,9 @@ class ServiceLocator {
   void init() {
     sl.registerSingleton<ApiService>(ApiService(Dio()));
     sl.registerSingleton<AuthRepoImplementation>(AuthRepoImplementation(sl()));
-    sl.registerSingleton<RequestRepoImplementation>(RequestRepoImplementation(sl()));
-    sl.registerSingleton<GetUsersRepoImplementation>(GetUsersRepoImplementation(sl()));
+    sl.registerSingleton<RequestRepoImplementation>(
+        RequestRepoImplementation(sl()));
+    sl.registerSingleton<GetUsersRepoImplementation>(
+        GetUsersRepoImplementation(sl()));
   }
 }

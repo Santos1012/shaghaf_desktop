@@ -52,7 +52,8 @@ class ServerFailure extends Failures {
     } else if (statusCode == 500) {
       return const ServerFailure(
           'Internal server error, Please try again later!');
-    } else if (statusCode == 0) {//edited
+    } else if (statusCode == 0) {
+      //edited
       return ServerFailure(response);
     } else {
       return const ServerFailure('Opps ,There was an error, Please try again!');

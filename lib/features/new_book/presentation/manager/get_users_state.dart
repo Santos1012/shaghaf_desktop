@@ -27,3 +27,12 @@ final class CreateUserError extends GetUsersState {
   final String errorMessage;
   CreateUserError(this.errorMessage);
 }
+
+final class UserBookLoading extends GetUsersState {}
+
+final class UserBookSuccess extends GetUsersState {}
+
+final class UserBookError extends GetUsersState {
+  final String errorMessage;
+  UserBookError(this.errorMessage);
+}

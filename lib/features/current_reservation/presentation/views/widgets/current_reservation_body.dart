@@ -69,7 +69,9 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          state is GetUsersSuccess ? "${BlocProvider.of<GetUsersCubit>(context).pageNumber}/${state.getUsersModel.pagination!.totalPages}" : "1/10",
+                          state is GetUsersSuccess
+                              ? "${BlocProvider.of<GetUsersCubit>(context).pageNumber}/${state.getUsersModel.pagination!.totalPages}"
+                              : "1/10",
                           style: TextStyle(
                               fontSize: 20.w(context),
                               fontWeight: FontWeight.w500,
@@ -188,14 +190,14 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                 text6: "Action",
                 color: Colors.grey.withOpacity(0.1),
               ),
-              if(state is GetUsersSuccess)...[
+              if (state is GetUsersSuccess) ...[
                 SizedBox(
                   width: Platform.isWindows
                       ? MediaQuery.of(context).size.width * 5 / 6
                       : double.infinity,
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount:state.getUsersModel.data!.length,
+                    itemCount: state.getUsersModel.data!.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Column(
@@ -215,7 +217,14 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                             child: ListRow(
                               text0: state.getUsersModel.data![index].username!,
                               text1: state.getUsersModel.data![index].phone!,
-                              text2: state.getUsersModel.data![index].createdAt!.toIso8601String().substring(0, state.getUsersModel.data![index].createdAt!.toIso8601String().indexOf("T")),
+                              text2: state.getUsersModel.data![index].createdAt!
+                                  .toIso8601String()
+                                  .substring(
+                                      0,
+                                      state
+                                          .getUsersModel.data![index].createdAt!
+                                          .toIso8601String()
+                                          .indexOf("T")),
                               text3: '5:00 pm',
                               text4: "3 hours",
                               text5: "App",
@@ -249,7 +258,6 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                   ),
                 )
               ]
-
             ],
           ),
         );

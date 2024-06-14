@@ -9,6 +9,7 @@ extension SizeExtension on num {
     return MediaQuery.of(context).size.width * (this / 1440);
   }
 }
+
 class SizeApp {
   final BuildContext context;
   double height;

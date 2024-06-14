@@ -66,7 +66,9 @@ class RequestsListRow extends StatelessWidget {
           ),
         ),
         header!
-            ?  SizedBox(width:140.w(context) ,)
+            ? SizedBox(
+                width: 140.w(context),
+              )
             : SingleChildScrollView(
                 child: Row(
                   children: [

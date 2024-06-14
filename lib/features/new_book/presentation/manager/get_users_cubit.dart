@@ -51,19 +51,36 @@ class GetUsersCubit extends Cubit<GetUsersState> {
     );
   }
 
+  Future<void> userBook({
+    required String userId,
+    required String bookDate,
+  }) async {
+    emit(UserBookLoading());
+    final result =
+        await getUsersRepo.userBook(userId: userId, bookDate: bookDate);
+    result.fold(
+      (l) {
+        log(l.errorMessage);
+        emit(UserBookError(l.errorMessage));
+      },
+      (r) {
+        // log(r.message.toString());
+        emit(UserBookSuccess());
+      },
+    );
+  }
 
   Future<void> getAllUsersPagination({bool add = false}) async {
-   emit(GetUsersLoading());
+    emit(GetUsersLoading());
 
-
-    final result = await getUsersRepo.getAllUsers(page: pageNumber,limit: 10);
+    final result = await getUsersRepo.getAllUsers(page: pageNumber, limit: 10);
     result.fold(
-          (l) {
+      (l) {
         log(l.errorMessage);
         emit(GetUsersError(l.errorMessage));
       },
-          (r) {
-        add==true?pageNumber++:pageNumber--;
+      (r) {
+        add == true ? pageNumber++ : pageNumber--;
         emit(GetUsersSuccess(r));
       },
     );

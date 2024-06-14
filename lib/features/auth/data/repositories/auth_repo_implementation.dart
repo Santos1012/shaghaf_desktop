@@ -11,7 +11,8 @@ class AuthRepoImplementation extends AuthRepo {
   AuthRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, AuthModel>> authLogin({required String email, required String password}) async {
+  Future<Either<Failures, AuthModel>> authLogin(
+      {required String email, required String password}) async {
     try {
       final res = await apiService.postData(
           data: {"password": password, "email": email},

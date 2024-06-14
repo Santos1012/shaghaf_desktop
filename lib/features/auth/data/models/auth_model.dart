@@ -8,14 +8,14 @@ class AuthModel {
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
-    message: json["message"],
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
-  );
+        message: json["message"],
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "message": message,
-    "data": data?.toJson(),
-  };
+        "message": message,
+        "data": data?.toJson(),
+      };
 }
 
 class Data {
@@ -52,38 +52,46 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    verificationCode: json["verificationCode"] == null ? null : VerificationCode.fromJson(json["verificationCode"]),
-    id: json["_id"],
-    username: json["username"],
-    email: json["email"],
-    phone: json["phone"],
-    password: json["password"],
-    isVerified: json["isVerified"],
-    birthdate: json["birthdate"] == null ? null : DateTime.parse(json["birthdate"]),
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    v: json["__v"],
-    token: json["token"],
-    point: json["point"],
-    userType: json["userType"],
-  );
+        verificationCode: json["verificationCode"] == null
+            ? null
+            : VerificationCode.fromJson(json["verificationCode"]),
+        id: json["_id"],
+        username: json["username"],
+        email: json["email"],
+        phone: json["phone"],
+        password: json["password"],
+        isVerified: json["isVerified"],
+        birthdate: json["birthdate"] == null
+            ? null
+            : DateTime.parse(json["birthdate"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+        token: json["token"],
+        point: json["point"],
+        userType: json["userType"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "verificationCode": verificationCode?.toJson(),
-    "_id": id,
-    "username": username,
-    "email": email,
-    "phone": phone,
-    "password": password,
-    "isVerified": isVerified,
-    "birthdate": birthdate?.toIso8601String(),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-    "token": token,
-    "point": point,
-    "userType": userType,
-  };
+        "verificationCode": verificationCode?.toJson(),
+        "_id": id,
+        "username": username,
+        "email": email,
+        "phone": phone,
+        "password": password,
+        "isVerified": isVerified,
+        "birthdate": birthdate?.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "__v": v,
+        "token": token,
+        "point": point,
+        "userType": userType,
+      };
 }
 
 class VerificationCode {
@@ -97,15 +105,17 @@ class VerificationCode {
     this.reason,
   });
 
-  factory VerificationCode.fromJson(Map<String, dynamic> json) => VerificationCode(
-    code: json["code"],
-    expireAt: json["expireAt"] == null ? null : DateTime.parse(json["expireAt"]),
-    reason: json["reason"],
-  );
+  factory VerificationCode.fromJson(Map<String, dynamic> json) =>
+      VerificationCode(
+        code: json["code"],
+        expireAt:
+            json["expireAt"] == null ? null : DateTime.parse(json["expireAt"]),
+        reason: json["reason"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "code": code,
-    "expireAt": expireAt?.toIso8601String(),
-    "reason": reason,
-  };
+        "code": code,
+        "expireAt": expireAt?.toIso8601String(),
+        "reason": reason,
+      };
 }

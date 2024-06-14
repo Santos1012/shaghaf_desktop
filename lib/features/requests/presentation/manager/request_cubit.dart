@@ -12,7 +12,7 @@ class RequestCubit extends Cubit<RequestState> {
 
   Future<void> getAllMembers() async {
     emit(RequestLoading());
-    final result = await requestRepo.getAllMembers(page:1);
+    final result = await requestRepo.getAllMembers(page: 1);
     result.fold(
       (l) {
         log(l.errorMessage);

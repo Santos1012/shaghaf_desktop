@@ -6,7 +6,6 @@ import 'package:saghaf_desktop/features/new_book/presentation/views/new_book_vie
 import 'package:saghaf_desktop/features/requests/presentation/views/requests_view.dart';
 import 'package:saghaf_desktop/features/side_bar/presentation/manager/side_bar_cubit.dart';
 
-
 class SideBarBody extends StatelessWidget {
   const SideBarBody({super.key});
 
@@ -24,6 +23,7 @@ class SideBarBody extends StatelessWidget {
         return Row(
           children: [
             SidebarX(
+              key: ValueKey("${cubit.index}"),
               controller: controller,
               extendIcon: Icons.arrow_forward_ios_rounded,
               theme: SidebarXTheme(

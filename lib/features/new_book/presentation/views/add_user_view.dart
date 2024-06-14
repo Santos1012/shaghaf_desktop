@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/media_query.dart';
@@ -115,17 +114,13 @@ class _AddUserViewState extends State<AddUserView> {
                               currentDate: x,
                               context: context,
                               confirmText: "Selected Date",
-                              firstDate: DateTime(DateTime
-                                  .now()
-                                  .year - 70),
-                              lastDate: DateTime(DateTime
-                                  .now()
-                                  .year + 5),
+                              firstDate: DateTime(DateTime.now().year - 70),
+                              lastDate: DateTime(DateTime.now().year + 5),
                             ) as DateTime;
                             log(x.toString());
                             log(x.runtimeType.toString());
                             setState(() {
-                              dateController.text =x.toString();
+                              dateController.text = x.toString();
                               selectedDate = x.toString();
                               log(selectedDate.toString());
                             });
@@ -162,12 +157,13 @@ class _AddUserViewState extends State<AddUserView> {
                           return MaterialButton(
                               height: 54.h(context),
                               onPressed: () {
-                                BlocProvider.of<GetUsersCubit>(context).createUser(
-                                    username: nameController.text,
-                                    phone: phoneController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    birthdate: dateController.text,
+                                BlocProvider.of<GetUsersCubit>(context)
+                                    .createUser(
+                                  username: nameController.text,
+                                  phone: phoneController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  birthdate: dateController.text,
                                 );
                                 nameController.clear();
                                 phoneController.clear();
@@ -177,7 +173,7 @@ class _AddUserViewState extends State<AddUserView> {
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(10.w(context))),
+                                      BorderRadius.circular(10.w(context))),
                               color: const Color(0xFF20473F),
                               child: const Text(
                                 "Done",
@@ -203,7 +199,7 @@ class _AddUserViewState extends State<AddUserView> {
                           },
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.circular(10.w(context))),
+                                  BorderRadius.circular(10.w(context))),
                           color: const Color(0xFF838383),
                           child: const Text(
                             "Clear All",

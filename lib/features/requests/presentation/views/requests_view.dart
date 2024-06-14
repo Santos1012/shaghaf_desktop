@@ -12,7 +12,8 @@ class RequestsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RequestCubit(sl<RequestRepoImplementation>())..getAllMembers(),
+      create: (context) =>
+          RequestCubit(sl<RequestRepoImplementation>())..getAllMembers(),
       child: Padding(
           padding: EdgeInsets.only(
             bottom: 15.w(context),

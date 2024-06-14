@@ -81,8 +81,7 @@ class ListWidget extends StatelessWidget {
                         MaterialButton(
                           onPressed: () {},
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(10.w(context)),
+                            borderRadius: BorderRadius.circular(10.w(context)),
                           ),
                           padding: EdgeInsets.all(16.w(context)),
                           color: const Color(0xFF20473E).withOpacity(0.75),

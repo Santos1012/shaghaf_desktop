@@ -24,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         body: Row(
           children: [
-            if(Platform.isWindows || Platform.isMacOS || Platform.isLinux )
+            if (Platform.isWindows || Platform.isMacOS || Platform.isLinux)
               Expanded(
                 flex: 5,
                 child: Container(

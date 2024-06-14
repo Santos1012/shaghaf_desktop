@@ -8,10 +8,10 @@ class SideBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
         body: BlocProvider(
-          create: (context) => SideBarCubit(),
-          child: const SideBarBody(),
-        ));
+      create: (context) => SideBarCubit(),
+      child: const SideBarBody(),
+    ));
   }
 }

@@ -31,7 +31,9 @@ class ListRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Platform.isWindows ? MediaQuery.of(context).size.width * 5 / 6:double.infinity,
+      width: Platform.isWindows
+          ? MediaQuery.of(context).size.width * 5 / 6
+          : double.infinity,
       color: color,
       height: 80.h(context),
       child: Row(

@@ -10,10 +10,13 @@ class NewBookView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetUsersCubit(sl<GetUsersRepoImplementation>())..getAllUsers(),
-      child: SafeArea(child: Scaffold(
-        body: NewBookBody(),
-      ),),
+      create: (context) =>
+          GetUsersCubit(sl<GetUsersRepoImplementation>())..getAllUsers(),
+      child: const SafeArea(
+        child: Scaffold(
+          body: NewBookBody(),
+        ),
+      ),
     );
   }
 }

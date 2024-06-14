@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -190,16 +191,37 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                 text6: "Action",
                 color: Colors.grey.withOpacity(0.1),
               ),
-              if (state is GetUsersSuccess) ...[
+              if (state is GetReservationsLoading) ...[
+                Container(
+                    width: Platform.isWindows
+                        ? MediaQuery.of(context).size.width * 5 / 6
+                        : double.infinity,
+                    color: Colors.grey.withOpacity(0.1),
+                    height: MediaQuery.of(context).size.height * .07,
+                    child: const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.grey,
+                    ))),
+              ],
+              if (state is GetReservationsSuccess) ...[
                 SizedBox(
                   width: Platform.isWindows
                       ? MediaQuery.of(context).size.width * 5 / 6
                       : double.infinity,
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.getUsersModel.data!.length,
+                    itemCount: state.getReservationsList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
+                      int? userIndex = state.getUsersList?.indexWhere(
+                          (element) =>
+                              element.id ==
+                              state.getReservationsList[index].user?.id);
+                      DateTime x = DateTime.parse(
+                          state.getReservationsList[index].start.toString());
+                      int hTimer = DateTime.now().hour - x.hour;
+                      int mTimer = DateTime.now().minute - x.minute;
+                      log(x.toString());
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -215,20 +237,30 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               setState(() {});
                             },
                             child: ListRow(
-                              text0: state.getUsersModel.data![index].username!,
-                              text1: state.getUsersModel.data![index].phone!,
-                              text2: state.getUsersModel.data![index].createdAt!
-                                  .toIso8601String()
-                                  .substring(
-                                      0,
-                                      state
-                                          .getUsersModel.data![index].createdAt!
-                                          .toIso8601String()
-                                          .indexOf("T")),
-                              text3: '5:00 pm',
-                              text4: "3 hours",
+                              text0: state.getReservationsList[index].user
+                                      ?.username ??
+                                  "",
+                              text1:
+                                  state.getUsersList?[userIndex ?? 0].phone ??
+                                      "",
+                              text2: "${x.year}-${x.month}-${x.day}",
+                              // state.getReservationsList[index].start!
+                              //     .toIso8601String()
+                              //     .substring(
+                              //         0,
+                              //         state.getReservationsList[index].start!
+                              //             .toIso8601String()
+                              //             .indexOf("T")),
+                              text3: "${x.hour}:${x.minute}:${x.second}",
+                              //  state.getReservationsList[index].start!
+                              //     .toIso8601String()
+                              //     .substring(11, 19),
+                              text4: "$hTimer h $mTimer m",
                               text5: "App",
-                              text6: "Close",
+                              text6:
+                                  state.getReservationsList[index].paid == false
+                                      ? "Close"
+                                      : "Open",
                               isAction: true,
                               color: isTapped && (selectedIndex == index)
                                   ? const Color(0xFF94B2FF)

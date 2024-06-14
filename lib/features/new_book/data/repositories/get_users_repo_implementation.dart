@@ -47,7 +47,8 @@ class GetUsersRepoImplementation extends GetUsersRepo {
   Future<Either<Failures, List<ReservationsModel>>> getAllReservations() async {
     List<ReservationsModel> resList = [];
     try {
-      final res = await apiService.getData(endPoint: '/api/members/book');
+      final res = await apiService.getData(
+          endPoint: '/api/members/book?limit=100&paid=false');
       if (res['message'] == "success") {
         for (var element in res["data"]) {
           resList.add(ReservationsModel.fromJson(element));

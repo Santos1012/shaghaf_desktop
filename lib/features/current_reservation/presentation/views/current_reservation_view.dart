@@ -12,9 +12,17 @@ class CurrentReservationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          GetUsersCubit(sl<GetUsersRepoImplementation>())..getAllUsers(),
+    return MultiBlocProvider(
+      providers: [
+       
+        BlocProvider(
+          create: (context) {
+            return GetUsersCubit(sl<GetUsersRepoImplementation>())
+              ..getReservations();
+          },
+        ),
+       
+      ],
       child: Padding(
           padding: EdgeInsets.only(
             bottom: 15.w(context),

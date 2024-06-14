@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/features/new_book/data/models/create_user_model.dart';
 import 'package:saghaf_desktop/features/new_book/data/models/get_users_model.dart';
+import 'package:saghaf_desktop/features/new_book/data/models/reservations_model/reservations_model.dart';
 import 'package:saghaf_desktop/features/new_book/data/repositories/get_users_repo.dart';
 part 'get_users_state.dart';
 
@@ -10,6 +11,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
   GetUsersCubit(this.getUsersRepo) : super(GetUsersInitial());
   final GetUsersRepo getUsersRepo;
   int pageNumber = 1;
+  List<DatumGetAllUsers>? r1;
   Future<void> getAllUsers() async {
     emit(GetUsersLoading());
     final result = await getUsersRepo.getAllUsers(page: 1, limit: 100);
@@ -20,7 +22,29 @@ class GetUsersCubit extends Cubit<GetUsersState> {
       },
       (r) {
         log(r.message.toString());
+        r1 = r.data ?? [];
         emit(GetUsersSuccess(r));
+      },
+    );
+  }
+
+  Future<void> getReservations() async {
+    emit(GetReservationsLoading());
+    final result = await getUsersRepo.getAllReservations();
+    final result1 = await getUsersRepo.getAllUsers(page: 1, limit: 100);
+    result.fold(
+      (l) {
+        log(l.errorMessage);
+        emit(GetReservationsError(l.errorMessage));
+      },
+      (r) {
+        result1.fold(
+          (l) {},
+          (r2) {
+            log(r.toString());
+            emit(GetReservationsSuccess(r, r2.data));
+          },
+        );
       },
     );
   }

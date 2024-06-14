@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
@@ -15,16 +14,16 @@ class NewBookBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = [
-      'smoking room',
-      'gaming room',
-      'edu room',
-      'other'
-    ];
-    final List<String> place = [
-      'Roxy',
-      'Masr Elgededa’',
-    ];
+    // final List<String> items = [
+    //   'smoking room',
+    //   'gaming room',
+    //   'edu room',
+    //   'other'
+    // ];
+    // final List<String> place = [
+    //   'Roxy',
+    //   'Masr Elgededa’',
+    // ];
     TextEditingController nameController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
     TextEditingController searchPhoneController = TextEditingController();

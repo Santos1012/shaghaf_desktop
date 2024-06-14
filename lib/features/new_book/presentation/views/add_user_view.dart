@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -114,8 +114,10 @@ class _AddUserViewState extends State<AddUserView> {
                               initialEntryMode: DatePickerEntryMode.calendar,
                               currentDate: x,
                               context: context,
-                              confirmText: selectedDate,
-                              firstDate: DateTime.now(),
+                              confirmText: "Selected Date",
+                              firstDate: DateTime(DateTime
+                                  .now()
+                                  .year - 70),
                               lastDate: DateTime(DateTime
                                   .now()
                                   .year + 5),

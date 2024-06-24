@@ -1,8 +1,8 @@
 part of 'get_users_cubit.dart';
 
 sealed class GetUsersState {}
+sealed class CreateUsersState {}
 
-final class GetUsersInitial extends GetUsersState {}
 
 final class GetUsersLoading extends GetUsersState {}
 
@@ -14,18 +14,6 @@ final class GetUsersSuccess extends GetUsersState {
 final class GetUsersError extends GetUsersState {
   final String errorMessage;
   GetUsersError(this.errorMessage);
-}
-
-final class CreateUserLoading extends GetUsersState {}
-
-final class CreateUserSuccess extends GetUsersState {
-  final CreateUserModel createUserModel;
-  CreateUserSuccess(this.createUserModel);
-}
-
-final class CreateUserError extends GetUsersState {
-  final String errorMessage;
-  CreateUserError(this.errorMessage);
 }
 
 final class GetReservationsLoading extends GetUsersState {}
@@ -41,11 +29,38 @@ final class GetReservationsError extends GetUsersState {
   GetReservationsError(this.errorMessage);
 }
 
-final class UserBookLoading extends GetUsersState {}
 
-final class UserBookSuccess extends GetUsersState {}
+final class GetRoomsLoading extends GetUsersState {}
 
-final class UserBookError extends GetUsersState {
+final class GetRoomsSuccess extends GetUsersState {
+  final List<RoomsModels> roomsModel;
+  final GetUsersModel getUsersModel;
+  GetRoomsSuccess(this.roomsModel, this.getUsersModel);
+}
+
+final class GetRoomsError extends GetUsersState {
   final String errorMessage;
-  UserBookError(this.errorMessage);
+  GetRoomsError(this.errorMessage);
+}
+final class GetUsersInitial extends GetUsersState {}
+final class CreateUsersInitial extends CreateUsersState {}
+
+final class CreateUserLoading extends CreateUsersState {}
+
+final class CreateUserSuccess extends CreateUsersState {
+  final CreateUserModel createUserModel;
+  CreateUserSuccess(this.createUserModel);
+}
+
+final class CreateUserError extends CreateUsersState {
+  final String errorMessage;
+  CreateUserError(this.errorMessage);
+}
+final class CreateUserBookLoading extends CreateUsersState {}
+
+final class CreateUserBookSuccess extends CreateUsersState {}
+
+final class CreateUserBookError extends CreateUsersState {
+  final String errorMessage;
+  CreateUserBookError(this.errorMessage);
 }

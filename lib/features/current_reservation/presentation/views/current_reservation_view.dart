@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
+import 'package:saghaf_desktop/features/current_reservation/data/repositories/get_users_repo_implementation.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/current_reservation_body.dart';
-import 'package:saghaf_desktop/features/new_book/data/repositories/get_users_repo_implementation.dart';
-import 'package:saghaf_desktop/features/new_book/presentation/manager/get_users_cubit.dart';
-
 import '../../../../core/service_locator.dart';
 
 class CurrentReservationView extends StatelessWidget {
@@ -14,14 +13,20 @@ class CurrentReservationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-       
+        // BlocProvider(
+        //   create: (context) {
+        //     return CurrentReservationCubit(
+        //         sl<CurrentReservationRepoImplementation>())
+        //       ..getReservations();
+        //   },
+        // ),
         BlocProvider(
           create: (context) {
-            return GetUsersCubit(sl<GetUsersRepoImplementation>())
-              ..getReservations();
+            return CurrentReservationCubit(
+                sl<CurrentReservationRepoImplementation>())
+              ..getRoomsReservations();
           },
         ),
-       
       ],
       child: Padding(
           padding: EdgeInsets.only(

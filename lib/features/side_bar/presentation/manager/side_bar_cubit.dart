@@ -7,9 +7,15 @@ part 'side_bar_state.dart';
 class SideBarCubit extends Cubit<SideBarState> {
   SideBarCubit() : super(SideBarInitial());
   int index = 0;
+  double size = 0;
 
   void changeIndex(int newIndex) {
     index = newIndex;
+    emit(SideBarInitial());
+  }
+
+  void changeSize(double newSize) {
+    size = newSize;
     emit(SideBarInitial());
   }
 }

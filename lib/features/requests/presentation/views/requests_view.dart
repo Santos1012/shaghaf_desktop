@@ -21,7 +21,6 @@ class RequestsView extends StatelessWidget {
               bottom: 15.w(context),
               right: 15.w(context),
               left: 15.w(context),
-              
             ),
             child: const RequestsBody()),
       ),

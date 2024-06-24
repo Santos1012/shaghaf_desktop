@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/features/new_book/data/models/create_user_model.dart';
-import 'package:saghaf_desktop/features/new_book/data/models/get_users_model.dart';
-import 'package:saghaf_desktop/features/new_book/data/models/reservations_model/reservations_model.dart';
+import 'package:saghaf_desktop/features/new_book/data/models/rooms_models/rooms_models.dart';
 import 'package:saghaf_desktop/features/new_book/data/repositories/get_users_repo.dart';
+
+import '../../../../core/models/get_users_model.dart';
+import '../../../current_reservation/data/models/reservations_model/reservations_model.dart';
 part 'get_users_state.dart';
 
 class GetUsersCubit extends Cubit<GetUsersState> {
@@ -12,43 +14,55 @@ class GetUsersCubit extends Cubit<GetUsersState> {
   final GetUsersRepo getUsersRepo;
   int pageNumber = 1;
   List<DatumGetAllUsers>? r1;
-  Future<void> getAllUsers() async {
-    emit(GetUsersLoading());
-    final result = await getUsersRepo.getAllUsers(page: 1, limit: 100,userType: "user");
-    result.fold(
-      (l) {
-        log(l.errorMessage);
-        emit(GetUsersError(l.errorMessage));
-      },
-      (r) {
-        // log(r.message.toString());
-        r1 = r.data ?? [];
-        emit(GetUsersSuccess(r));
-      },
-    );
-  }
 
-  Future<void> getReservations() async {
-    emit(GetReservationsLoading());
-    final result = await getUsersRepo.getAllReservations();
-    final result1 = await getUsersRepo.getAllUsers(page: 1, limit: 100,userType: "");
+  Future<void> getAllRooms() async {
+    emit(GetRoomsLoading());
+    final result = await getUsersRepo.getAllRooms();
+    final result1 =
+        await getUsersRepo.getAllUsers(page: 1, limit: 100, userType: "");
     result.fold(
       (l) {
         log(l.errorMessage);
-        emit(GetReservationsError(l.errorMessage));
+        emit(GetRoomsError(l.errorMessage));
       },
       (r) {
         result1.fold(
-          (l) {},
+          (l) {
+            log(l.errorMessage);
+            emit(GetRoomsError(l.errorMessage));
+          },
           (r2) {
             // log(r.toString());
-            emit(GetReservationsSuccess(r, r2.data));
+            emit(GetRoomsSuccess(r, r2));
           },
         );
       },
     );
   }
+  // Future<void> getAllUsersPagination({bool add = false}) async {
+  //   emit(GetUsersLoading());
 
+  //   final result = await getUsersRepo.getAllUsers(
+  //       page: pageNumber, limit: 10, userType: "user");
+  //   result.fold(
+  //     (l) {
+  //       log(l.errorMessage);
+  //       emit(GetUsersError(l.errorMessage));
+  //     },
+  //     (r) {
+  //       add == true ? pageNumber++ : pageNumber--;
+  //       emit(GetUsersSuccess(r));
+  //     },
+  //   );
+  // }
+}
+class CreateUsersCubit extends Cubit<CreateUsersState> {
+  CreateUsersCubit(this.getUsersRepo) : super(CreateUsersInitial());
+  final GetUsersRepo getUsersRepo;
+
+
+
+  
   Future<void> createUser({
     required String username,
     required String birthdate,
@@ -75,37 +89,31 @@ class GetUsersCubit extends Cubit<GetUsersState> {
     );
   }
 
-  Future<void> userBook({
+  Future<void> createUserBook({
+    required String roomId,
+    required int seatCount,
+    required String startDate,
+    required String endDate,
+    required String planId,
     required String userId,
-    required String bookDate,
   }) async {
-    emit(UserBookLoading());
-    final result =
-        await getUsersRepo.userBook(userId: userId, bookDate: bookDate);
-    result.fold(
-      (l) {
-        log(l.errorMessage);
-        emit(UserBookError(l.errorMessage));
-      },
-      (r) {
-        // log(r.message.toString());
-        emit(UserBookSuccess());
-      },
+    emit(CreateUserBookLoading());
+    final result = await getUsersRepo.createRoomBook(
+      roomId: roomId,
+      seatCount: seatCount,
+      startDate: startDate,
+      endDate: endDate,
+      planId: planId,
+      userId: userId,
     );
-  }
-
-  Future<void> getAllUsersPagination({bool add = false}) async {
-    emit(GetUsersLoading());
-
-    final result = await getUsersRepo.getAllUsers(page: pageNumber, limit: 10,userType: "user");
     result.fold(
       (l) {
         log(l.errorMessage);
-        emit(GetUsersError(l.errorMessage));
+        emit(CreateUserBookError(l.errorMessage));
       },
       (r) {
-        add == true ? pageNumber++ : pageNumber--;
-        emit(GetUsersSuccess(r));
+        log("       h                  ");
+        emit(CreateUserBookSuccess());
       },
     );
   }

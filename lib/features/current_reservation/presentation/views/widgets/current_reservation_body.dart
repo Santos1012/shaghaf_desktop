@@ -6,9 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/add_items_body.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/list_row.dart';
-import 'package:saghaf_desktop/features/new_book/presentation/manager/get_users_cubit.dart';
+
+import '../../../../../core/widgets/loading_widget.dart';
 
 class CurrentReservationBody extends StatefulWidget {
   const CurrentReservationBody({super.key});
@@ -21,12 +23,13 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
   bool isTapped = false;
 
   int selectedIndex = -1;
-
+  DateTime a = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GetUsersCubit, GetUsersState>(
+    return BlocConsumer<CurrentReservationCubit, CurrentReservationState>(
       listener: (context, state) {},
       builder: (context, state) {
+        
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,9 +73,10 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          state is GetUsersSuccess
-                              ? "${BlocProvider.of<GetUsersCubit>(context).pageNumber}/${state.getUsersModel.pagination!.totalPages}"
-                              : "1/10",
+                          state is CurrentReservationSuccess
+                              ? "1/1"
+                              // ? "${BlocProvider.of<CurrentReservationCubit>(context).pageNumber}/${state.getUsersList!.pagination!.totalPages}"
+                              : "1/1",
                           style: TextStyle(
                               fontSize: 20.w(context),
                               fontWeight: FontWeight.w500,
@@ -84,12 +88,12 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                         ),
                         IconButton(
                           onPressed: () {
-                            if (BlocProvider.of<GetUsersCubit>(context)
-                                    .pageNumber >
-                                1) {
-                              BlocProvider.of<GetUsersCubit>(context)
-                                  .getAllUsersPagination(add: false);
-                            }
+                            // if (BlocProvider.of<GetUsersCubit>(context)
+                            //         .pageNumber >
+                            //     1) {
+                            //   BlocProvider.of<GetUsersCubit>(context)
+                            //       .getAllUsersPagination(add: false);
+                            // }
                           },
                           padding: EdgeInsets.only(left: 10.w(context)),
                           icon: Icon(
@@ -113,16 +117,16 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                         ),
                         IconButton(
                           onPressed: () {
-                            if (state is GetUsersSuccess) {
-                              if (state.getUsersModel.pagination!.totalPages! >
-                                  BlocProvider.of<GetUsersCubit>(context)
-                                      .pageNumber) {
-                                {
-                                  BlocProvider.of<GetUsersCubit>(context)
-                                      .getAllUsersPagination(add: true);
-                                }
-                              }
-                            }
+                            // if (state is CurrentReservationSuccess) {
+                            //   if (state.getUsersList!.pagination!.totalPages! >
+                            //       BlocProvider.of<GetUsersCubit>(context)
+                            //           .pageNumber) {
+                            //     {
+                            //       BlocProvider.of<GetUsersCubit>(context)
+                            //           .getAllUsersPagination(add: true);
+                            //     }
+                            //   }
+                            // }
                           },
                           icon: Icon(Icons.arrow_forward_ios,
                               size: 30.w(context)),
@@ -167,9 +171,10 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                             ),
                             child: Center(
                                 child: Text(
-                                    state is GetUsersSuccess
-                                        ? "${state.getUsersModel.pagination!.totalPages!} page"
-                                        : "20 page",
+                                    state is CurrentReservationSuccess
+                                        // ? "${state.getUsersList!.pagination!.totalPages!} page"
+                                        ? "1 page"
+                                        : "1 page",
                                     style: TextStyle(
                                       fontSize: 20.w(context),
                                       color: const Color(0xFF6E6E6E),
@@ -192,19 +197,16 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                 color: Colors.grey.withOpacity(0.1),
               ),
               const Divider(),
-              if (state is GetReservationsLoading) ...[
+              if (state is CurrentReservationLoading) ...[
                 Container(
                     width: Platform.isWindows
                         ? MediaQuery.of(context).size.width * 5 / 6
                         : double.infinity,
                     color: Colors.grey.withOpacity(0.1),
                     height: MediaQuery.of(context).size.height * .07,
-                    child: const Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.grey,
-                    ))),
+                    child: const LoadingWidget(),),
               ],
-              if (state is GetReservationsSuccess) ...[
+              if (state is CurrentReservationSuccess) ...[
                 SizedBox(
                   width: Platform.isWindows
                       ? MediaQuery.of(context).size.width * 5 / 6
@@ -214,19 +216,22 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                     itemCount: state.getReservationsList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      int? userIndex = state.getUsersList?.indexWhere(
+                      int? userIndex = state.getUsersList?.data!.indexWhere(
                           (element) =>
                               element.id ==
                               state.getReservationsList[index].user?.id);
-                      DateTime x = DateTime.parse(
-                          state.getReservationsList[index].start.toString());
-
+                      DateTime x = DateTime.parse(state
+                          .getReservationsList[index].startDate
+                          .toString());
+                      DateTime a = DateTime.parse(
+                          state.getReservationsList[index].endDate.toString());
                       // int hTimer = DateTime.now().hour - x.hour;
-                      DateTime a = DateTime.now().subtract(Duration(
-                          days: x.day,
-                          hours: x.hour,
-                          minutes: x.minute,
-                          seconds: x.second));
+                      // a = DateTime.now().subtract(Duration(
+                      //     days: x.day,
+                      //     hours: x.hour,
+                      //     minutes: x.minute,
+                      //     seconds: x.second));
+                      // a.add(const Duration(seconds: 1));
                       // int mTimer = DateTime.now().minute - x.minute;
                       // log(a.toString());
                       return Column(
@@ -244,12 +249,21 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               setState(() {});
                             },
                             child: ListRow(
-                              text0: state.getReservationsList[index].user
-                                      ?.username ??
-                                  "",
-                              text1:
-                                  state.getUsersList?[userIndex ?? 0].phone ??
-                                      "",
+                              text0: (userIndex ?? -1) >= 0
+                                  ? (state.getReservationsList[index].user
+                                          ?.username ??
+                                      "")
+                                  : state.getReservationsList[index].user
+                                          ?.username
+                                          ?.toString() ??
+                                      "Not available",
+                              text1: (userIndex ?? -1) >= 0
+                                  ? (state.getUsersList?.data?[userIndex!]
+                                          .phone ??
+                                      "")
+                                  : state.getReservationsList[index].user?.email
+                                          ?.toString() ??
+                                      "Not available",
                               text2: "${x.year}-${x.month}-${x.day}",
                               // state.getReservationsList[index].start!
                               //     .toIso8601String()
@@ -259,15 +273,20 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               //             .toIso8601String()
                               //             .indexOf("T")),
                               text3: "${x.hour}:${x.minute}:${x.second}",
+                              text4: "${a.hour}:${a.minute}:${a.second}",
                               //  state.getReservationsList[index].start!
                               //     .toIso8601String()
                               //     .substring(11, 19),
-                              text4: "${a.hour}h ${a.minute}m ${a.second}s",
-                              text5: "App",
-                              text6:
-                                  state.getReservationsList[index].paid == false
-                                      ? "Close"
-                                      : "Open",
+                              // text4: "${a.hour}h ${a.minute}m ${a.second}s",
+                              text5: state
+                                      .getReservationsList[index].room?.title
+                                      ?.toString() ??
+                                  "Not available",
+                              text6: state.getReservationsList[index]
+                                          .reservationPaid ==
+                                      false
+                                  ? "Close"
+                                  : "Open",
                               isAction: true,
                               color: isTapped && (selectedIndex == index)
                                   ? const Color(0xFF94B2FF)

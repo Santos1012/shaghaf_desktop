@@ -155,7 +155,7 @@ class _AddUserViewState extends State<AddUserView> {
                           return MaterialButton(
                               height: 54.h(context),
                               onPressed: () {
-                                BlocProvider.of<GetUsersCubit>(context)
+                                BlocProvider.of<CreateUsersCubit>(context)
                                     .createUser(
                                   username: nameController.text,
                                   phone: phoneController.text,

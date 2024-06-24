@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
+import 'package:saghaf_desktop/core/widgets/loading_widget.dart';
 import 'package:saghaf_desktop/features/auth/presentation/manager/auth_cubit.dart';
 
 import '../../../../../core/media_query.dart';
@@ -138,9 +139,7 @@ class _LoginBodyState extends State<LoginBody> {
                   },
                   builder: (context, state) {
                     if (state is AuthLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(color: Colors.grey,),
-                      );
+                      return const LoadingWidget();
                     } else if (state is AuthError) {
                       return TextButton(
                         onPressed: () {

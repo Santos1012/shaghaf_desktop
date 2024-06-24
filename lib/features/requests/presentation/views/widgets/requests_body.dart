@@ -5,6 +5,8 @@ import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/requests/presentation/manager/request_cubit.dart';
 import 'package:saghaf_desktop/features/requests/presentation/views/widgets/requests_list_row.dart';
 
+import '../../../../../core/widgets/loading_widget.dart';
+
 class RequestsBody extends StatelessWidget {
   const RequestsBody({super.key});
 
@@ -33,11 +35,7 @@ class RequestsBody extends StatelessWidget {
             listener: (context, state) {},
             builder: (context, state) {
               if (state is RequestLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.grey,
-                  ),
-                );
+                return const LoadingWidget();
               } else if (state is RequestError) {
                 return Center(
                   child: Text(state.errorMessage),

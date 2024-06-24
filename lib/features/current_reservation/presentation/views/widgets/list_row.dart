@@ -43,7 +43,9 @@ class ListRow extends StatelessWidget {
             text: text0,
             fontWeight: FontWeight.w600,
           ),
-          SizedBox(width: 30.w(context),),
+          SizedBox(
+            width: 30.w(context),
+          ),
           ListWidget(
             text: text1,
             fontWeight: FontWeight.w600,

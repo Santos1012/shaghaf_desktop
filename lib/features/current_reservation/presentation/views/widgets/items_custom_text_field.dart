@@ -10,6 +10,7 @@ class ItemsCustomTextField extends StatelessWidget {
   final void Function()? onRemoveTap;
   final void Function()? onAddTap;
   final Color? color;
+  final Color? removeColor;
   final bool? phone;
   final int maxCount;
   final int count;
@@ -27,6 +28,7 @@ class ItemsCustomTextField extends StatelessWidget {
       this.onRemoveTap,
       this.onAddTap,
       this.color,
+      this.removeColor,
       this.phone = false,
       this.icon});
 
@@ -57,36 +59,34 @@ class ItemsCustomTextField extends StatelessWidget {
               borderSide: BorderSide(
                   color:
                       isSearch == true ? Colors.grey : const Color(0xFFA4A4A4)),
-              borderRadius: BorderRadius.circular(14.w(context)),
+              borderRadius: BorderRadius.circular(5.w(context)),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   color: isSearch == true
                       ? Colors.grey.withOpacity(0.2)
                       : const Color(0xFFA4A4A4)),
-              borderRadius: BorderRadius.circular(14.w(context)),
+              borderRadius: BorderRadius.circular(5.w(context)),
             ),
             disabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   color: isSearch == true
                       ? Colors.grey.withOpacity(0.2)
                       : const Color(0xFFA4A4A4)),
-              borderRadius: BorderRadius.circular(14.w(context)),
+              borderRadius: BorderRadius.circular(5.w(context)),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   color: isSearch == true
                       ? Colors.grey.withOpacity(0.2)
                       : const Color(0xFFA4A4A4)),
-              borderRadius: BorderRadius.circular(14.w(context)),
+              borderRadius: BorderRadius.circular(5.w(context)),
             ),
             prefixIcon: GestureDetector(
               onTap: onRemoveTap,
               child: Icon(
                 Icons.remove,
-                color: count > 0
-                    ? const Color(0xFF20473E).withOpacity(0.75)
-                    : Colors.grey,
+                color: removeColor,
               ),
             ),
             fillColor: color ?? Colors.grey,

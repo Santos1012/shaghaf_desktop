@@ -16,6 +16,7 @@ class CurrentReservationCubit extends Cubit<CurrentReservationState> {
   final CurrentReservationRepo currentReservationRepo;
   int pageNumber = 1;
   DateTime? x;
+  int refresh = 0;
 
   Future<void> getRoomsReservations() async {
     emit(CurrentReservationLoading());

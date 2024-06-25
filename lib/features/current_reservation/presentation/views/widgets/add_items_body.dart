@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/core/widgets/loading_widget.dart';
 import 'package:saghaf_desktop/features/current_reservation/data/models/products_model.dart';
+import 'package:saghaf_desktop/features/current_reservation/data/models/room_reservations_models/coffee.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/manager/add_items_cubit/add_items_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/manager/get_product_cubit/get_product_cubit.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/reservations_cubit/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/items_custom_text_field.dart';
 
 import '../../../data/models/room_reservations_models/room_reservations_models.dart';
@@ -21,9 +23,13 @@ class AddItemsBody extends StatefulWidget {
 }
 
 class _AddItemsBodyState extends State<AddItemsBody> {
-  int itemCountText = 1;
-  int itemPriceText = 20;
+  int itemCountText = 0;
+  int itemPriceText = 0;
   ProductsModel? selectedProduct;
+  int index = -1;
+  Coffee? coffee;
+  int refresh = 0;
+
   @override
   Widget build(BuildContext context) {
     // final List<String> items = ['tea', 'coffee', 'water', 'milk'];
@@ -31,6 +37,7 @@ class _AddItemsBodyState extends State<AddItemsBody> {
       padding: const EdgeInsets.all(12.0),
       child: SingleChildScrollView(
         child: Column(
+          key: ValueKey(refresh),
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BlocConsumer<GetProductCubit, GetProductState>(
@@ -42,7 +49,7 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 135,
+                        height: 155,
                         width: MediaQuery.of(context).size.width * 7.5 / 11,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -68,9 +75,35 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                                       child: DropdownMenu<ProductsModel>(
                                         onSelected: (value) {
                                           selectedProduct = value;
-                                          itemCountText = 1;
-                                          setState(() {});
+                                          itemCountText = 0;
+                                          if (widget.userReservation.coffee !=
+                                                  null &&
+                                              widget.userReservation.coffee!
+                                                  .isNotEmpty) {
+                                            index = (widget
+                                                    .userReservation.coffee
+                                                    ?.indexWhere((element) =>
+                                                        element.product ==
+                                                        (value?.id ?? ""))) ??
+                                                -1;
+                                          }
+
+                                          if (index >= 0) {
+                                            coffee = widget
+                                                .userReservation.coffee?[index];
+                                            log((widget
+                                                        .userReservation
+                                                        .coffee?[index]
+                                                        .product ??
+                                                    "")
+                                                .toString());
+                                            log("ddd d d d d  d d ");
+                                            log((coffee?.product).toString());
+                                          }
                                           log(value.toString());
+                                          log(index.toString());
+                                          log((value?.id ?? "").toString());
+                                          setState(() {});
                                         },
                                         dropdownMenuEntries: List.generate(
                                             state.productsList.length, (index) {
@@ -86,6 +119,12 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                                         enableSearch: true,
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: 5.h(context),
+                                    ),
+                                    Text(
+                                      "${(selectedProduct?.title ?? "Product")} count : ${(selectedProduct?.count ?? 0) - itemCountText}",
+                                    )
                                   ],
                                 )),
                             SizedBoxApp(
@@ -93,30 +132,46 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: ItemsCustomTextField(
-                                hint:
-                                    "count:  ${itemCountText.toString()}   price:   ${(selectedProduct?.price ?? 0).toString()}   Total:   ${((selectedProduct?.price ?? 0) * itemCountText).toString()} LE",
-                                textName: "Price",
-                                controller: TextEditingController(),
-                                color: Colors.white,
-                                maxCount: selectedProduct?.count ?? 0,
-                                count: itemCountText,
-                                onAddTap: () {
-                                  if (itemCountText <
-                                      (selectedProduct?.count ?? 0)) {
-                                    ++itemCountText;
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ItemsCustomTextField(
+                                    hint:
+                                        "count:  ${itemCountText.toString()}   price:   ${(selectedProduct?.price ?? 0).toString()}   Total:   ${((selectedProduct?.price ?? 0) * itemCountText).toString()} LE",
+                                    textName: "Price",
+                                    controller: TextEditingController(),
+                                    color: Colors.white,
+                                    maxCount: selectedProduct?.count ?? 0,
+                                    count: itemCountText,
+                                    onAddTap: () {
+                                      if (itemCountText <
+                                          (selectedProduct?.count ?? 0)) {
+                                        ++itemCountText;
 
-                                    setState(() {});
-                                  }
-                                },
-                                onRemoveTap: () {
-                                  if (itemCountText > 0) {
-                                    --itemCountText;
-                                    // itemTotalPriceText =
-                                    //     itemCountText * itemPriceText;
-                                    setState(() {});
-                                  }
-                                },
+                                        setState(() {});
+                                      }
+                                    },
+                                    removeColor:
+                                        itemCountText > 0 - (coffee?.count ?? 0)
+                                            ? const Color(0xFF20473E)
+                                                .withOpacity(0.75)
+                                            : Colors.grey,
+                                    onRemoveTap: () {
+                                      if (itemCountText >
+                                          0 - (coffee?.count ?? 0)) {
+                                        --itemCountText;
+                                        // itemTotalPriceText =
+                                        //     itemCountText * itemPriceText;
+                                        setState(() {});
+                                      }
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 5.h(context),
+                                  ),
+                                  Text(
+                                      "user had token ${index >= 0 ? (coffee?.count ?? 0) : 0} ${selectedProduct?.title ?? ""} Product")
+                                ],
                               ),
                             ),
                           ],
@@ -147,10 +202,27 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              context.read<AddItemsCubit>().addItemToUser(
-                                  productId: selectedProduct!.id!,
-                                  reservationId: widget.userReservation.id??"",
-                                  count: itemCountText);
+                              if (itemCountText > 0) {
+                                context.read<AddItemsCubit>().addItemToUser(
+                                    productId: selectedProduct!.id!,
+                                    reservationId:
+                                        widget.userReservation.id ?? "",
+                                    count: itemCountText);
+                                if (state is AddItemsSuccess) {
+                                  context.read<GetProductCubit>().getProducts();
+                                  ++refresh;
+                                  context
+                                      .read<CurrentReservationCubit>()
+                                      .getRoomsReservations();
+                                  itemCountText = 0;
+                                  itemPriceText = 0;
+                                  selectedProduct = null;
+                                  index = -1;
+                                  coffee = null;
+                                  refresh = 0;
+                                }
+                                setState(() {});
+                              }
                             },
                             child: Container(
                               width: 175.w(context),
@@ -179,13 +251,26 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                     }
                     return GestureDetector(
                       onTap: () {
-                        context.read<AddItemsCubit>().addItemToUser(
-                            productId: selectedProduct!.id!,
-                            reservationId: widget.userReservation.id??"",
-                            count: itemCountText);
-                        if (state is AddItemsSuccess) {
-                          context.read<GetProductCubit>().getProducts();
+                        if (itemCountText > 0) {
+                          context.read<AddItemsCubit>().addItemToUser(
+                              productId: selectedProduct!.id!,
+                              reservationId: widget.userReservation.id ?? "",
+                              count: itemCountText);
+                          if (state is AddItemsSuccess) {
+                            context.read<GetProductCubit>().getProducts();
+                            ++refresh;
+                            context
+                                .read<CurrentReservationCubit>()
+                                .getRoomsReservations();
+                            itemCountText = 0;
+                            itemPriceText = 0;
+                            selectedProduct = null;
+                            index = -1;
+                            coffee = null;
+                            refresh = 0;
+                          }
                         }
+
                         setState(() {});
                       },
                       child: Container(

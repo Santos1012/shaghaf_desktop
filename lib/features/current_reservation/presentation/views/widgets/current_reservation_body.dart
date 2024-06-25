@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
-import 'package:saghaf_desktop/features/current_reservation/presentation/manager/current_reservation_cubit.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/reservations_cubit/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/add_items_body.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/list_row.dart';
 
@@ -29,7 +29,6 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
     return BlocConsumer<CurrentReservationCubit, CurrentReservationState>(
       listener: (context, state) {},
       builder: (context, state) {
-        
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,12 +198,13 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
               const Divider(),
               if (state is CurrentReservationLoading) ...[
                 Container(
-                    width: Platform.isWindows
-                        ? MediaQuery.of(context).size.width * 5 / 6
-                        : double.infinity,
-                    color: Colors.grey.withOpacity(0.1),
-                    height: MediaQuery.of(context).size.height * .07,
-                    child: const LoadingWidget(),),
+                  width: Platform.isWindows
+                      ? MediaQuery.of(context).size.width * 5 / 6
+                      : double.infinity,
+                  color: Colors.grey.withOpacity(0.1),
+                  height: MediaQuery.of(context).size.height * .07,
+                  child: const LoadingWidget(),
+                ),
               ],
               if (state is CurrentReservationSuccess) ...[
                 SizedBox(
@@ -307,7 +307,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                                     selectedIndex = -1;
                                   }
                                   setState(() {});
-                                },
+                                }, userReservation: state.getReservationsList[index],
                               ),
                             ),
                           const Divider()

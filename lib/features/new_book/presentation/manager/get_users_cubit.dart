@@ -56,13 +56,11 @@ class GetUsersCubit extends Cubit<GetUsersState> {
   //   );
   // }
 }
+
 class CreateUsersCubit extends Cubit<CreateUsersState> {
   CreateUsersCubit(this.getUsersRepo) : super(CreateUsersInitial());
   final GetUsersRepo getUsersRepo;
 
-
-
-  
   Future<void> createUser({
     required String username,
     required String birthdate,

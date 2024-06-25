@@ -19,7 +19,7 @@ abstract class GetUsersRepo {
   });
   Future<Either<Failures, void>> createRoomBook({
     required String roomId,
-    required int seatCount ,
+    required int seatCount,
     required String startDate,
     required String endDate,
     required String planId,

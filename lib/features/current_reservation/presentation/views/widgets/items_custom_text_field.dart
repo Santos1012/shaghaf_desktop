@@ -50,7 +50,7 @@ class ItemsCustomTextField extends StatelessWidget {
           readOnly: true,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
-                horizontal: 20.w(context), vertical: 20.h(context)),
+                horizontal: 50.w(context), vertical: 20.h(context)),
             hintText: hint,
             hintStyle: const TextStyle(fontFamily: "Comfortaa"),
             border: OutlineInputBorder(
@@ -84,12 +84,11 @@ class ItemsCustomTextField extends StatelessWidget {
               onTap: onRemoveTap,
               child: Icon(
                 Icons.remove,
-                color: count >0
+                color: count > 0
                     ? const Color(0xFF20473E).withOpacity(0.75)
                     : Colors.grey,
               ),
             ),
-            
             fillColor: color ?? Colors.grey,
             filled: true,
             suffixIcon: GestureDetector(

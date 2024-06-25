@@ -1,8 +1,8 @@
 part of 'get_users_cubit.dart';
 
 sealed class GetUsersState {}
-sealed class CreateUsersState {}
 
+sealed class CreateUsersState {}
 
 final class GetUsersLoading extends GetUsersState {}
 
@@ -29,7 +29,6 @@ final class GetReservationsError extends GetUsersState {
   GetReservationsError(this.errorMessage);
 }
 
-
 final class GetRoomsLoading extends GetUsersState {}
 
 final class GetRoomsSuccess extends GetUsersState {
@@ -42,7 +41,9 @@ final class GetRoomsError extends GetUsersState {
   final String errorMessage;
   GetRoomsError(this.errorMessage);
 }
+
 final class GetUsersInitial extends GetUsersState {}
+
 final class CreateUsersInitial extends CreateUsersState {}
 
 final class CreateUserLoading extends CreateUsersState {}
@@ -56,6 +57,7 @@ final class CreateUserError extends CreateUsersState {
   final String errorMessage;
   CreateUserError(this.errorMessage);
 }
+
 final class CreateUserBookLoading extends CreateUsersState {}
 
 final class CreateUserBookSuccess extends CreateUsersState {}

@@ -1,15 +1,21 @@
 import 'dart:developer';
 
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
+import 'package:saghaf_desktop/core/widgets/loading_widget.dart';
+import 'package:saghaf_desktop/features/current_reservation/data/models/products_model.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/add_items_cubit/add_items_cubit.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/get_product_cubit/get_product_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/items_custom_text_field.dart';
+
+import '../../../data/models/room_reservations_models/room_reservations_models.dart';
 
 class AddItemsBody extends StatefulWidget {
   final void Function()? onTap;
+  final RoomReservationsModels userReservation;
 
-  const AddItemsBody({super.key, this.onTap});
-
+  const AddItemsBody({super.key, this.onTap, required this.userReservation});
   @override
   State<AddItemsBody> createState() => _AddItemsBodyState();
 }
@@ -17,162 +23,192 @@ class AddItemsBody extends StatefulWidget {
 class _AddItemsBodyState extends State<AddItemsBody> {
   int itemCountText = 1;
   int itemPriceText = 20;
-  int itemTotalPriceText = 20;
+  ProductsModel? selectedProduct;
   @override
   Widget build(BuildContext context) {
-    final List<String> items = ['tea', 'coffee', 'water', 'milk'];
+    // final List<String> items = ['tea', 'coffee', 'water', 'milk'];
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Container(
-                //   decoration: BoxDecoration(
-                //       borderRadius: const BorderRadius.all(
-                //         Radius.circular(5),
-                //       ),
-                //       border: Border.all(
-                //         color: const Color(0xFF20473E).withOpacity(0.75),
-                //       ),
-                //       shape: BoxShape.rectangle),
-                //   child: Icon(
-                //     Icons.add,
-                //     size: 50.h(context),
-                //     color: const Color(0xFFF04C29),
-                //   ),
-                // )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 135,
-                  width: MediaQuery.of(context).size.width * 7.5 / 11,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+            BlocConsumer<GetProductCubit, GetProductState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                if (state is GetProductSuccess) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text("Add Item",
-                              style: TextStyle(
-                                fontSize: 24.w(context),
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Comfortaa",
-                              )),
-                          SizedBox(
-                            height: 32.h(context),
-                          ),
-                          CustomDropdown<String>(
-                            hintText: 'add item',
-                            headerBuilder: (context, selectedItem) {
-                              return Text(
-                                selectedItem,
-                              );
-                            },
-                            items: items,
-                            initialItem: items[0],
-                            decoration: CustomDropdownDecoration(
-                              closedBorder: Border.all(
-                                  color: const Color(0xFFB1B1B1), width: 1),
-                              expandedBorder: Border.all(
-                                  color: const Color(0xFFB1B1B1), width: 1),
+                      SizedBox(
+                        height: 135,
+                        width: MediaQuery.of(context).size.width * 7.5 / 11,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text("Add Item",
+                                        style: TextStyle(
+                                          fontSize: 24.w(context),
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "Comfortaa",
+                                        )),
+                                    SizedBox(
+                                      height: 32.h(context),
+                                    ),
+                                    Container(
+                                      color: Colors.white,
+                                      child: DropdownMenu<ProductsModel>(
+                                        onSelected: (value) {
+                                          selectedProduct = value;
+                                          itemCountText = 1;
+                                          setState(() {});
+                                          log(value.toString());
+                                        },
+                                        dropdownMenuEntries: List.generate(
+                                            state.productsList.length, (index) {
+                                          return DropdownMenuEntry(
+                                            label: state
+                                                .productsList[index].title
+                                                .toString(),
+                                            value: state.productsList[index],
+                                          );
+                                        }),
+                                        width: 450.w(context),
+                                        enableFilter: true,
+                                        enableSearch: true,
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            SizedBoxApp(
+                              w: 25.w(context),
                             ),
-                            onChanged: (value) {
-                              log('changing value to: $value');
-                            },
-                          ),
-                        ],
-                      )),
-                      SizedBoxApp(
-                        w: 25.w(context),
-                      ),
-                      Expanded(
-                        child: ItemsCustomTextField(
-                          hint:
-                              "count:  ${itemCountText.toString()}   price:   ${itemPriceText.toString()}   Total:   ${itemTotalPriceText.toString()} LE",
-                          textName: "Price",
-                          controller: TextEditingController(),
-                          color: Colors.white,
-                          maxCount: 20,
-                          count: itemCountText,
-                          onAddTap: () {
-                            if (itemCountText < 20) {
-                              ++itemCountText;
-                              itemTotalPriceText =
-                                  itemCountText * itemPriceText;
-                              setState(() {});
-                            }
-                          },
-                          onRemoveTap: () {
-                            if (itemCountText > 0) {
-                              --itemCountText;
-                              itemTotalPriceText =
-                                  itemCountText * itemPriceText;
-                              setState(() {});
-                            }
-                          },
+                            Expanded(
+                              flex: 1,
+                              child: ItemsCustomTextField(
+                                hint:
+                                    "count:  ${itemCountText.toString()}   price:   ${(selectedProduct?.price ?? 0).toString()}   Total:   ${((selectedProduct?.price ?? 0) * itemCountText).toString()} LE",
+                                textName: "Price",
+                                controller: TextEditingController(),
+                                color: Colors.white,
+                                maxCount: selectedProduct?.count ?? 0,
+                                count: itemCountText,
+                                onAddTap: () {
+                                  if (itemCountText <
+                                      (selectedProduct?.count ?? 0)) {
+                                    ++itemCountText;
+
+                                    setState(() {});
+                                  }
+                                },
+                                onRemoveTap: () {
+                                  if (itemCountText > 0) {
+                                    --itemCountText;
+                                    // itemTotalPriceText =
+                                    //     itemCountText * itemPriceText;
+                                    setState(() {});
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
-                  ),
-                ),
-                // GestureDetector(
-                //   onTap: onTap,
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //       borderRadius: const BorderRadius.all(
-                //         Radius.circular(5),
-                //       ),
-                //       border: Border.all(
-                //         color: const Color(0xFF20473E).withOpacity(0.75),
-                //       ),
-                //       shape: BoxShape.rectangle,
-                //     ),
-                //     child: Center(
-                //       child: Icon(
-                //         Icons.remove,
-                //         size: 50.h(context),
-                //         color: const Color(0xFFF04C29),
-                //       ),
-                //     ),
-                //   ),
-                // )
-              ],
+                  );
+                } else if (state is GetProductLoading) {
+                  return const LoadingWidget();
+                }
+                return const Center(
+                  child: Text("Not Available yet"),
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                GestureDetector(
-                  onTap: widget.onTap,
-                  child: Container(
-                    width: 175.w(context),
-                    height: 50.h(context),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF20473E).withOpacity(0.75),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Done",
-                        style: TextStyle(
-                          fontSize: 20.w(context),
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Comfortaa",
+                BlocConsumer<AddItemsCubit, AddItemsState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    if (state is AddItemsLoading) {
+                      return const LoadingWidget();
+                    }
+                    if (state is AddItemsFailure) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              context.read<AddItemsCubit>().addItemToUser(
+                                  productId: selectedProduct!.id!,
+                                  reservationId: widget.userReservation.id??"",
+                                  count: itemCountText);
+                            },
+                            child: Container(
+                              width: 175.w(context),
+                              height: 50.h(context),
+                              decoration: BoxDecoration(
+                                color:
+                                    const Color(0xFF20473E).withOpacity(0.75),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Done",
+                                  style: TextStyle(
+                                    fontSize: 20.w(context),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "Comfortaa",
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(state.errorMessage),
+                        ],
+                      );
+                    }
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<AddItemsCubit>().addItemToUser(
+                            productId: selectedProduct!.id!,
+                            reservationId: widget.userReservation.id??"",
+                            count: itemCountText);
+                        if (state is AddItemsSuccess) {
+                          context.read<GetProductCubit>().getProducts();
+                        }
+                        setState(() {});
+                      },
+                      child: Container(
+                        width: 175.w(context),
+                        height: 50.h(context),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF20473E).withOpacity(0.75),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Done",
+                            style: TextStyle(
+                              fontSize: 20.w(context),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Comfortaa",
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 )
               ],
             ),

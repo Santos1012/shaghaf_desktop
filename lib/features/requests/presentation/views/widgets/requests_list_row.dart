@@ -41,9 +41,21 @@ class RequestsListRow extends StatelessWidget {
                   text: text0,
                   fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
-                ListWidget(
-                  text: text1,
-                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
+                SizedBox(
+                  width: 20.w(context),
+                ),
+                SizedBox(
+                  width: 200.w(context),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: ListWidget(
+                      text: text1,
+                      fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20.w(context),
                 ),
                 ListWidget(
                   text: text2,
@@ -57,9 +69,21 @@ class RequestsListRow extends StatelessWidget {
                   text: text4,
                   fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
                 ),
-                ListWidget(
-                  text: text5,
-                  fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
+                SizedBox(
+                  width: 20.w(context),
+                ),
+                SizedBox(
+                  width: 200.w(context),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: ListWidget(
+                      text: text5,
+                      fontWeight: header! ? FontWeight.w800 : FontWeight.w400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20.w(context),
                 ),
               ],
             ),

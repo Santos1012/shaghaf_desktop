@@ -21,7 +21,7 @@ class CurrentReservationCubit extends Cubit<CurrentReservationState> {
   Future<void> getRoomsReservations() async {
     emit(CurrentReservationLoading());
     final result = await currentReservationRepo.getAllRoomsReservations();
-
+    refresh++;
     final result1 = await currentReservationRepo.getAllUsers(
         page: 1, limit: 100, userType: "");
     result.fold(

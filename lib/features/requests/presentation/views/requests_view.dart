@@ -13,7 +13,7 @@ class RequestsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          RequestCubit(sl<RequestRepoImplementation>())..getAllMembers(),
+          RequestCubit(gitIt<RequestRepoImplementation>())..getAllMembers(),
       child: Align(
         alignment: Alignment.topCenter,
         child: Padding(

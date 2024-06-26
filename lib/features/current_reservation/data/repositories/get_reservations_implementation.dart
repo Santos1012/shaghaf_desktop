@@ -1,5 +1,7 @@
 // import 'dart:developer';
 
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:saghaf_desktop/core/api_service.dart';
@@ -50,7 +52,11 @@ class CurrentReservationRepoImplementation extends CurrentReservationRepo {
     List<RoomReservationsModels> resList = [];
     try {
       final res =
-          await apiService.getData(endPoint: '/api/rooms/book?limit=100');
+          //
+          await apiService.getData(
+              endPoint:
+                  //  '/api/rooms/book?paid=false&limit=100');
+                  '/api/rooms/book?limit=100');
       if (res['message'] == "success") {
         for (var element in res["data"]) {
           resList.add(RoomReservationsModels.fromJson(element));
@@ -60,7 +66,7 @@ class CurrentReservationRepoImplementation extends CurrentReservationRepo {
           (a, b) => a.startDate!.compareTo(b.startDate!),
         );
         resList.removeWhere(
-          (element) => element.reservationPaid ?? true == true,
+          (element) => (element.reservationPaid ?? true) == true,
         );
         return right(
           resList,
@@ -139,6 +145,40 @@ class CurrentReservationRepoImplementation extends CurrentReservationRepo {
         );
       }
     } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure.fromDioError(e),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failures, void>> endReservation({
+    required String reservationId,
+  }) async {
+    try {
+      final res = await apiService.patchData(data: {
+        "coffeePaid": true, //optional
+        "extraPaid": true, //optional
+        "reservationPaid": true //optional
+      }, endPoint: '/api/rooms/book/$reservationId/payment');
+      if (res['message'] == "success") {
+        // log(res.toString());
+        return right(null);
+      } else {
+        log(res["errors"]['message']);
+        return left(
+          ServerFailure(res['message']),
+        );
+      }
+    } catch (e) {
+      log(e.toString());
       if (e is DioException) {
         return left(
           ServerFailure.fromDioError(e),

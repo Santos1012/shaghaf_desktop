@@ -219,7 +219,7 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                                   selectedProduct = null;
                                   index = -1;
                                   coffee = null;
-                                  refresh = 0;
+                                  // refresh = 0;
                                 }
                                 setState(() {});
                               }
@@ -267,10 +267,9 @@ class _AddItemsBodyState extends State<AddItemsBody> {
                             selectedProduct = null;
                             index = -1;
                             coffee = null;
-                            refresh = 0;
+                            // refresh = 0;
                           }
                         }
-
                         setState(() {});
                       },
                       child: Container(

@@ -7,17 +7,18 @@ import 'package:saghaf_desktop/features/new_book/data/repositories/get_users_rep
 import 'package:saghaf_desktop/features/requests/data/repositories/request_repo_implementation.dart';
 import 'api_service.dart';
 
-final sl = GetIt.instance;
+final gitIt = GetIt.instance;
 
 class ServiceLocator {
   void init() {
-    sl.registerSingleton<ApiService>(ApiService(Dio()));
-    sl.registerSingleton<AuthRepoImplementation>(AuthRepoImplementation(sl()));
-    sl.registerSingleton<RequestRepoImplementation>(
-        RequestRepoImplementation(sl()));
-    sl.registerSingleton<GetUsersRepoImplementation>(
-        GetUsersRepoImplementation(sl()));
-    sl.registerSingleton<CurrentReservationRepoImplementation>(
-        CurrentReservationRepoImplementation(sl()));
+    gitIt.registerSingleton<ApiService>(ApiService(Dio()));
+    gitIt.registerSingleton<AuthRepoImplementation>(
+        AuthRepoImplementation(gitIt()));
+    gitIt.registerSingleton<RequestRepoImplementation>(
+        RequestRepoImplementation(gitIt()));
+    gitIt.registerSingleton<GetUsersRepoImplementation>(
+        GetUsersRepoImplementation(gitIt()));
+    gitIt.registerSingleton<CurrentReservationRepoImplementation>(
+        CurrentReservationRepoImplementation(gitIt()));
   }
 }

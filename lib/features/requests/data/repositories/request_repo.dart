@@ -4,5 +4,6 @@ import 'package:saghaf_desktop/features/requests/data/models/request_model.dart'
 
 abstract class RequestRepo {
   RequestRepo();
-  Future<Either<Failures, RequestModel>> getAllMembers({required int page});
+  Future<Either<Failures, RequestPaginationModel>> getAllMembers(
+      {required int page});
 }

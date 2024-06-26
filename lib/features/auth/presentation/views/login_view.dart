@@ -20,7 +20,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(sl<AuthRepoImplementation>()),
+      create: (context) => AuthCubit(gitIt<AuthRepoImplementation>()),
       child: Scaffold(
         body: Row(
           children: [

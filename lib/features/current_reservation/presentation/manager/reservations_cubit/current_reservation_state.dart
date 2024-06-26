@@ -16,4 +16,3 @@ final class CurrentReservationsError extends CurrentReservationState {
   final String errorMessage;
   CurrentReservationsError(this.errorMessage);
 }
-

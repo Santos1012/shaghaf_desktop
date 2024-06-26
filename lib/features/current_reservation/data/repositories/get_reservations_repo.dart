@@ -23,4 +23,7 @@ abstract class CurrentReservationRepo {
     required String userId,
     required int count,
   });
+  Future<Either<Failures, void>> endReservation({
+    required String reservationId,
+  });
 }

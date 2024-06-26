@@ -3,6 +3,7 @@ import 'package:saghaf_desktop/core/utils/imports.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
 import 'package:saghaf_desktop/features/current_reservation/data/repositories/get_reservations_implementation.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/manager/add_items_cubit/add_items_cubit.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/end_reservation_cubit/end_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/manager/get_product_cubit/get_product_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/manager/reservations_cubit/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/current_reservation_body.dart';
@@ -18,18 +19,25 @@ class CurrentReservationView extends StatelessWidget {
         BlocProvider(
           create: (context) {
             return CurrentReservationCubit(
-                sl<CurrentReservationRepoImplementation>())
+                gitIt<CurrentReservationRepoImplementation>())
               ..getRoomsReservations();
           },
         ),
         BlocProvider(
           create: (context) {
-            return AddItemsCubit(sl<CurrentReservationRepoImplementation>());
+            return AddItemsCubit(gitIt<CurrentReservationRepoImplementation>());
           },
         ),
         BlocProvider(
           create: (context) {
-            return GetProductCubit(sl<CurrentReservationRepoImplementation>())
+            return EndReservationCubit(
+                gitIt<CurrentReservationRepoImplementation>());
+          },
+        ),
+        BlocProvider(
+          create: (context) {
+            return GetProductCubit(
+                gitIt<CurrentReservationRepoImplementation>())
               ..getProducts();
           },
         ),

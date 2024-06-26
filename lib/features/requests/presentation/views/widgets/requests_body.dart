@@ -6,6 +6,7 @@ import 'package:saghaf_desktop/features/requests/presentation/manager/request_cu
 import 'package:saghaf_desktop/features/requests/presentation/views/widgets/requests_list_row.dart';
 
 import '../../../../../core/widgets/loading_widget.dart';
+import '../../../../current_reservation/presentation/views/widgets/list_row.dart';
 
 class RequestsBody extends StatelessWidget {
   const RequestsBody({super.key});
@@ -31,6 +32,26 @@ class RequestsBody extends StatelessWidget {
           SizedBoxApp(
             h: 40.h(context),
           ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RequestsListRow(
+                text0: "Name",
+                text1: "Phone",
+                text2: "Date",
+                text3: 'StartTime',
+                text4: "EndTime",
+                text5: "Room",hasAction: false,header: true,
+                // text6: "Action",
+                color: Colors.grey.withOpacity(0.1),
+              ),
+              const Divider(),
+            ],
+          ),
+          const Divider(),
+          SizedBoxApp(
+            h: 40.h(context),
+          ),
           BlocConsumer<RequestCubit, RequestState>(
             listener: (context, state) {},
             builder: (context, state) {
@@ -40,10 +61,12 @@ class RequestsBody extends StatelessWidget {
                 return Center(
                   child: Text(state.errorMessage),
                 );
-              } else if (state is RequestSuccess) {
+              } else if (state is RequestSuccess &&
+                  state.requestModel.requestsList != null &&
+                  state.requestModel.requestsList!.isNotEmpty) {
                 return ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 1,
+                  itemCount: state.requestModel.requestsList?.length ?? 0,
                   //  state.requestModel.data!.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -53,59 +76,71 @@ class RequestsBody extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           RequestsListRow(
-                            header: index == 0 ? true : false,
-                            text0: index == 0
-                                ? "Name"
-                                : state
-                                    .requestModel.data![index].user!.username!,
-                            text1: index == 0
-                                ? "Email"
-                                : state.requestModel.data![index].user!.email!,
-                            text2: index == 0
-                                ? "Date"
-                                : state.requestModel.data![index].createdAt!
-                                    .toIso8601String()
-                                    .substring(
-                                        0,
-                                        state.requestModel.data![index]
+                            header: false,
+                            text0: state.requestModel.requestsList?[index].user
+                                    ?.username ??
+                                "Not Available",
+                            text1: state.requestModel.requestsList?[index].user
+                                    ?.email ??
+                               "Not Available",
+                            text2: state
+                                .requestModel.requestsList![index].createdAt!
+                                .toIso8601String()
+                                .substring(
+                                    0,
+                                    state.requestModel.requestsList![index]
+                                        .createdAt!
+                                        .toIso8601String()
+                                        .indexOf("T")),
+                            text3: state
+                                .requestModel.requestsList![index].createdAt!
+                                .toIso8601String()
+                                .substring(
+                                    state.requestModel.requestsList![index]
                                             .createdAt!
                                             .toIso8601String()
-                                            .indexOf("T")),
-                            text3: index == 0
-                                ? 'Time'
-                                : state.requestModel.data![index].createdAt!
-                                    .toIso8601String()
-                                    .substring(
-                                        state.requestModel.data![index]
-                                                .createdAt!
-                                                .toIso8601String()
-                                                .indexOf("T") +
-                                            1,
-                                        state.requestModel.data![index]
-                                            .createdAt!
+                                            .indexOf("T") +
+                                        1,
+                                    state.requestModel.requestsList![index]
+                                        .createdAt!
+                                        .toIso8601String()
+                                        .lastIndexOf(":")),
+                            text4:state
+                                .requestModel.requestsList![index].endDate==null? "Not Available":
+                            state
+                                .requestModel.requestsList![index].endDate!
+                                .toIso8601String()
+                                .substring(
+                                    state.requestModel.requestsList![index]
+                                            .endDate!
                                             .toIso8601String()
-                                            .lastIndexOf(":")),
-                            text4: index == 0
-                                ? "Timer"
-                                : state
-                                    .requestModel.data![index].member!.duration!
-                                    .toString(),
-                            text5: index == 0
-                                ? "Room"
-                                : index % 2 == 0
-                                    ? "Birthday"
-                                    : index % 3 == 0
-                                        ? "Funny"
-                                        : "Training",
-                            hasAction: index == 0 ? false : true,
+                                            .indexOf("T") +
+                                        1,
+                                    state.requestModel.requestsList![index]
+                                        .endDate!
+                                        .toIso8601String()
+                                        .lastIndexOf(":")),
+                                //  ((state.requestModel.requestsList![index]
+                                //             .endDate??DateTime.now())
+                                //             .difference(state
+                                //                 .requestModel
+                                //                 .requestsList![index]
+                                //                 .createdAt??DateTime.now()))
+                                //         .toString(),
+                            // text5: index % 2 == 0
+                            //     ? "Birthday"
+                            //     : index % 3 == 0
+                            //         ? "Funny"
+                            //         : "Training",
+                            text5: (state.requestModel.requestsList?[index]
+                                        .products?[0].product) !=
+                                    null
+                                ? (state.requestModel.requestsList?[index]
+                                        .products![0].product?.id ??
+                                    "Not Found")
+                                : "Not Found",
+                            hasAction: true,
                             color: Colors.grey.withOpacity(0.1),
-                          ),
-                          const Divider(),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("No Requests yet"),
-                            ],
                           ),
                           const Divider(),
                         ],
@@ -114,7 +149,14 @@ class RequestsBody extends StatelessWidget {
                   },
                 );
               }
-              return const SizedBox.shrink();
+              return const SizedBox.shrink(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("No Requests yet"),
+                  ],
+                ),
+              );
             },
           )
         ],

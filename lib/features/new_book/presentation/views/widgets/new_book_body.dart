@@ -633,7 +633,7 @@ class _NewBookBodyState extends State<NewBookBody> {
                             context.read<CreateUsersCubit>().createUserBook(
                                   roomId: selectedRoom!.id!,
                                   seatCount: 1,
-                                  startDate: selectedDateTime.toString(),
+                                  startDate: DateTime.now().toString(),
                                   endDate: (selectedPlan?.stamp ?? "") == "day"
                                       ? DateTime.now()
                                           .add(Duration(days: selectedNumber))

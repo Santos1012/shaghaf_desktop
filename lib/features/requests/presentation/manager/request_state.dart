@@ -7,7 +7,7 @@ final class RequestInitial extends RequestState {}
 final class RequestLoading extends RequestState {}
 
 final class RequestSuccess extends RequestState {
-  final RequestModel requestModel;
+  final RequestPaginationModel requestModel;
   RequestSuccess(this.requestModel);
 }
 

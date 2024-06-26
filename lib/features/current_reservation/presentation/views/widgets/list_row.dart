@@ -1,9 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/media_query.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/manager/reservations_cubit/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/list_widget.dart';
+import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/receipt_widget.dart';
+
+import '../../../data/models/room_reservations_models/room_reservations_models.dart';
 
 class ListRow extends StatelessWidget {
   final String text0;
@@ -15,6 +19,7 @@ class ListRow extends StatelessWidget {
   final String text6;
   final Color color;
   final bool isAction;
+  final RoomReservationsModels? reservation;
 
   const ListRow(
       {super.key,
@@ -26,7 +31,8 @@ class ListRow extends StatelessWidget {
       required this.text5,
       required this.text6,
       this.isAction = false,
-      required this.color});
+      required this.color,
+      this.reservation});
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +72,50 @@ class ListRow extends StatelessWidget {
             text: text5,
             fontWeight: FontWeight.w600,
           ),
-          ListWidget(
-            isAction: isAction,
-            text: text6,
-            closed: true,
-            fontWeight: FontWeight.w600,
-          ),
+          if (reservation != null)
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ReceiptWidget(
+                        fontWeight: FontWeight.w600,
+                        reservation: reservation,
+                      );
+                    },
+                  ).then(
+                    (value) {
+                      context
+                          .read<CurrentReservationCubit>()
+                          .getRoomsReservations();
+                      context.read<CurrentReservationCubit>().refresh++;
+                    },
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Text(
+                    textAlign: TextAlign.start,
+                    "close time",
+                    style: TextStyle(
+                      fontSize: 24.w(context),
+                      color: const Color.fromARGB(255, 32, 97, 84),
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Comfortaa",
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          if (reservation == null)
+            ListWidget(
+              isAction: isAction,
+              text: text6,
+              closed: true,
+              fontWeight: FontWeight.w600,
+            ),
         ],
       ),
     );

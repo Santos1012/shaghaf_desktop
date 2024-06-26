@@ -13,11 +13,11 @@ class NewBookView extends StatelessWidget {
       providers: [
         BlocProvider<GetUsersCubit>(
           create: (context) =>
-              GetUsersCubit(sl<GetUsersRepoImplementation>())..getAllRooms(),
+              GetUsersCubit(gitIt<GetUsersRepoImplementation>())..getAllRooms(),
         ),
         BlocProvider<CreateUsersCubit>(
           create: (context) =>
-              CreateUsersCubit(sl<GetUsersRepoImplementation>()),
+              CreateUsersCubit(gitIt<GetUsersRepoImplementation>()),
         ),
       ],
       child: const SafeArea(

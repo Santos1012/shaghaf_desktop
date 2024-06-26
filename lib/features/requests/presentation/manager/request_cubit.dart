@@ -19,7 +19,7 @@ class RequestCubit extends Cubit<RequestState> {
         emit(RequestError(l.errorMessage));
       },
       (r) {
-        // log(r.message.toString());
+        log(r.requestsList!.length.toString());
         emit(RequestSuccess(r));
       },
     );

@@ -31,6 +31,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
       builder: (context, state) {
         return SingleChildScrollView(
           child: Column(
+            key: ValueKey(context.read<CurrentReservationCubit>().refresh),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBoxApp(
@@ -189,9 +190,9 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                 text0: "Name",
                 text1: "Phone",
                 text2: "Date",
-                text3: 'Time',
-                text4: "Timer",
-                text5: "Method",
+                text3: 'StartTime',
+                text4: "EndTime",
+                text5: "Room",
                 text6: "Action",
                 color: Colors.grey.withOpacity(0.1),
               ),
@@ -288,6 +289,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                                   ? "Close"
                                   : "Open",
                               isAction: true,
+                              reservation: state.getReservationsList[index],
                               color: isTapped && (selectedIndex == index)
                                   ? const Color(0xFF94B2FF)
                                   : Colors.grey.withOpacity(0.1),
@@ -307,7 +309,9 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                                     selectedIndex = -1;
                                   }
                                   setState(() {});
-                                }, userReservation: state.getReservationsList[index],
+                                },
+                                userReservation:
+                                    state.getReservationsList[index],
                               ),
                             ),
                           const Divider()

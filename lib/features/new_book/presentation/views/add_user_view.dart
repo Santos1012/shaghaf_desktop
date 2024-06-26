@@ -29,7 +29,7 @@ class _AddUserViewState extends State<AddUserView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetUsersCubit(sl<GetUsersRepoImplementation>()),
+      create: (context) => GetUsersCubit(gitIt<GetUsersRepoImplementation>()),
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,

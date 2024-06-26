@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:saghaf_desktop/core/api_service.dart';
@@ -11,16 +13,19 @@ class RequestRepoImplementation extends RequestRepo {
   RequestRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, RequestModel>> getAllMembers({
+  Future<Either<Failures, RequestPaginationModel>> getAllMembers({
     required int page,
   }) async {
     try {
       final res = await apiService.getData(
-          endPoint: '/api/members/book?$page=1&limit=10');
+          endPoint: '/api/birthdays/book?page$page&limit=100');
+      log(res.toString());
       if (res['message'] == "success") {
-        return right(
-          RequestModel.fromJson(res),
-        );
+        RequestPaginationModel x = RequestPaginationModel.fromJson(res);
+        // x.requestsList?.removeWhere(
+        //   (element) => element.status != "pending",
+        // );
+        return right(x);
       } else {
         return left(
           ServerFailure(res['message']),

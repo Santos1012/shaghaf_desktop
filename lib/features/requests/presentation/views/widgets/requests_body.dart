@@ -6,7 +6,6 @@ import 'package:saghaf_desktop/features/requests/presentation/manager/request_cu
 import 'package:saghaf_desktop/features/requests/presentation/views/widgets/requests_list_row.dart';
 
 import '../../../../../core/widgets/loading_widget.dart';
-import '../../../../current_reservation/presentation/views/widgets/list_row.dart';
 
 class RequestsBody extends StatelessWidget {
   const RequestsBody({super.key});

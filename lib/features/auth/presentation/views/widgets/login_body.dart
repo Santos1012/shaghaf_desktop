@@ -69,6 +69,7 @@ class _LoginBodyState extends State<LoginBody> {
                   label: "Password",
                   hint: "Enter password",
                   controller: passwordController,
+                  isPass: true,
                   validator: (p0) {
                     if (p0!.isEmpty) {
                       return "Please enter your password";

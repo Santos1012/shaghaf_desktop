@@ -159,9 +159,6 @@ class _AddUserViewState extends State<AddUserView> {
                                     .createUser(
                                   username: nameController.text,
                                   phone: phoneController.text,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  birthdate: dateController.text,
                                 );
                                 nameController.clear();
                                 phoneController.clear();

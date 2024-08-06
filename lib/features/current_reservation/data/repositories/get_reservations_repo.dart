@@ -19,9 +19,8 @@ abstract class CurrentReservationRepo {
     required int limit,
   });
   Future<Either<Failures, void>> addCoffee({
-    required String productId,
+    required List product,
     required String userId,
-    required int count,
   });
   Future<Either<Failures, void>> endReservation({
     required String reservationId,

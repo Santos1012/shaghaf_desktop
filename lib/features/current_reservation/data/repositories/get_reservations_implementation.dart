@@ -125,15 +125,19 @@ class CurrentReservationRepoImplementation extends CurrentReservationRepo {
 
   @override
   Future<Either<Failures, void>> addCoffee({
-    required String productId,
+    required List product,
     required String userId,
-    required int count,
   }) async {
     try {
+      final formattedProducts = product.map((item) {
+        return {
+          'product': item['product'].id!,
+          'count': item['count'],
+        };
+      }).toList();
+
       final res = await apiService.putData(data: {
-        "coffee": [
-          {"product": productId, "count": count}
-        ]
+        "coffee": formattedProducts
       }, endPoint: '/api/rooms/book/$userId/stuff');
       if (res['message'] == "success") {
         // log(res.toString());

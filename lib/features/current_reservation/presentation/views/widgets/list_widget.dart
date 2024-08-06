@@ -37,7 +37,7 @@ class ListWidget extends StatelessWidget {
             textAlign: TextAlign.start,
             text,
             style: TextStyle(
-              fontSize: 24.w(context),
+              fontSize: 18.w(context),
               color: isAction
                   ? const Color(0xFFF04C29)
                   : fontWeight == FontWeight.w600

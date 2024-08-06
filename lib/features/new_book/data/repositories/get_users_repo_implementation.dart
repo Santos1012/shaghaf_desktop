@@ -114,18 +114,12 @@ class GetUsersRepoImplementation extends GetUsersRepo {
   @override
   Future<Either<Failures, CreateUserModel>> createUsers({
     required String username,
-    required String birthdate,
     required String phone,
-    required String password,
-    required String email,
   }) async {
     try {
       final res = await apiService.postData(data: {
         "username": username,
-        "birthdate": birthdate,
         "phone": phone,
-        "password": password,
-        "email": email,
         "userType": "user"
       }, endPoint: '/api/users/admin');
       if (res['message'] == "success") {

@@ -6,20 +6,28 @@ class RequestsListWidget extends StatelessWidget {
   final FontWeight? fontWeight;
   final bool isAction;
 
-  const RequestsListWidget(
-      {super.key, required this.text, this.fontWeight, this.isAction = false});
+  const RequestsListWidget({
+    super.key,
+    required this.text,
+    this.fontWeight,
+    this.isAction = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Center(
-      child: Text(text,
-          style: TextStyle(
-            fontSize: 24.w(context),
-            color: isAction ? const Color(0xFFF04C29) : Colors.black,
-            fontWeight: fontWeight ?? FontWeight.w400,
-            fontFamily: "Comfortaa",
-          )),
-    ));
+    return Container(
+      constraints: BoxConstraints(maxWidth: 200.w(context)),
+      child: Text(
+        textAlign:         TextAlign.start,
+        text,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: 18.w(context),
+          color: isAction ? const Color(0xFFF04C29) : Colors.black,
+          fontWeight: fontWeight ?? FontWeight.w400,
+          fontFamily: "Comfortaa",
+        ),
+      ),
+    );
   }
 }

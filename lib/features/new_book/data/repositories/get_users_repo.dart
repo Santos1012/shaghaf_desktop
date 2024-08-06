@@ -12,10 +12,7 @@ abstract class GetUsersRepo {
       {required int page, required int limit, required String userType});
   Future<Either<Failures, CreateUserModel>> createUsers({
     required String username,
-    required String birthdate,
     required String phone,
-    required String password,
-    required String email,
   });
   Future<Either<Failures, void>> createRoomBook({
     required String roomId,

@@ -1,6 +1,4 @@
-// import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghaf_desktop/core/utils/imports.dart';
@@ -9,7 +7,6 @@ import 'package:saghaf_desktop/core/widgets/app_custom_text_field.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/manager/reservations_cubit/current_reservation_cubit.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/add_items_body.dart';
 import 'package:saghaf_desktop/features/current_reservation/presentation/views/widgets/list_row.dart';
-
 import '../../../../../core/widgets/loading_widget.dart';
 
 class CurrentReservationBody extends StatefulWidget {
@@ -35,7 +32,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBoxApp(
-                h: 80.h(context),
+                h: 40.h(context),
               ),
               Text(
                 "Current reservations",
@@ -75,7 +72,6 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                         Text(
                           state is CurrentReservationSuccess
                               ? "1/1"
-                              // ? "${BlocProvider.of<CurrentReservationCubit>(context).pageNumber}/${state.getUsersList!.pagination!.totalPages}"
                               : "1/1",
                           style: TextStyle(
                               fontSize: 20.w(context),
@@ -176,7 +172,7 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                                         ? "1 page"
                                         : "1 page",
                                     style: TextStyle(
-                                      fontSize: 20.w(context),
+                                      fontSize: 15.w(context),
                                       color: const Color(0xFF6E6E6E),
                                       fontWeight: FontWeight.w500,
                                       fontFamily: "Comfortaa",
@@ -243,11 +239,14 @@ class _CurrentReservationBodyState extends State<CurrentReservationBody> {
                               if (selectedIndex != index) {
                                 isTapped = true;
                                 selectedIndex = index;
+                                setState(() {});
+
                               } else {
                                 isTapped = false;
                                 selectedIndex = -1;
+                                setState(() {});
+
                               }
-                              setState(() {});
                             },
                             child: ListRow(
                               text0: (userIndex ?? -1) >= 0

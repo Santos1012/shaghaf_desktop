@@ -10,13 +10,12 @@ class AddItemsCubit extends Cubit<AddItemsState> {
   DateTime? x;
 
   Future<void> addItemToUser({
-    required String productId,
+    required List product,
     required String reservationId,
-    required int count,
   }) async {
     emit(AddItemsLoading());
     final result = await currentReservationRepo.addCoffee(
-        productId: productId, userId: reservationId, count: count);
+       product: product, userId: reservationId);
 
     result.fold(
       (l) {

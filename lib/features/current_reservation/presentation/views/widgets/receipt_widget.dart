@@ -52,7 +52,7 @@ class _ReceiptWidgetState extends State<ReceiptWidget> {
         content: Container(
           padding: EdgeInsets.symmetric(
               horizontal: 24.w(context), vertical: 24.h(context)),
-          width: 512.w(context),
+          width: 800.w(context),
           height: 674.h(context),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -85,121 +85,119 @@ class _ReceiptWidgetState extends State<ReceiptWidget> {
               ),
               Expanded(
                 child: (widget.reservation != null &&
-                        widget.reservation!.coffee != null &&
-                        widget.reservation!.coffee!.isNotEmpty)
+                    widget.reservation!.coffee != null &&
+                    widget.reservation!.coffee!.isNotEmpty)
                     ? BlocConsumer<GetProductCubit, GetProductState>(
-                        listener: (context, state) {},
-                        builder: (context, state) {
-                          int index1 = -1;
-                          if (state is GetProductSuccess &&
-                              state.productsList.isNotEmpty) {
-                            return ListView.separated(
-                                itemBuilder: (context, index) {
-                                  index1 = (state.productsList.indexWhere(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      int index1 = -1;
+                      if (state is GetProductSuccess &&
+                          state.productsList.isNotEmpty) {
+                        return ListView.separated(
+                            itemBuilder: (context, index) {
+                              index1 = (state.productsList.indexWhere(
                                       (element) =>
-                                          element.id ==
-                                          (widget.reservation?.coffee?[index]
-                                                  .product ??
-                                              "")));
+                                  element.id ==
+                                      (widget.reservation?.coffee?[index]
+                                          .product ??
+                                          "")));
 
-                                  if (index1 != -1) {
-                                    return Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            state.productsList[index1].title ??
-                                                "",
-                                            style: TextStyle(
-                                              fontSize: index == 0
-                                                  ? 20.w(context)
-                                                  : 18.w(context),
-                                              fontWeight: index == 0
-                                                  ? FontWeight.w500
-                                                  : FontWeight.w400,
-                                              color: index == 0
-                                                  ? Colors.black
-                                                  : const Color(0xFF9D9D9D),
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                              if (index1 != -1) {
+                                return Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        state.productsList[index1].title ??
+                                            "",
+                                        style: TextStyle(
+                                          fontSize: index == 0
+                                              ? 20.w(context)
+                                              : 18.w(context),
+                                          fontWeight: index == 0
+                                              ? FontWeight.w500
+                                              : FontWeight.w400,
+                                          color: index == 0
+                                              ? Colors.black
+                                              : const Color(0xFF9D9D9D),
                                         ),
-                                        Expanded(
-                                          child: Text(
-                                            widget.reservation!.coffee![index]
-                                                    .count
-                                                    ?.toString() ??
-                                                "",
-                                            style: TextStyle(
-                                              fontSize: index == 0
-                                                  ? 20.w(context)
-                                                  : 18.w(context),
-                                              fontWeight: index == 0
-                                                  ? FontWeight.w500
-                                                  : FontWeight.w400,
-                                              color: index == 0
-                                                  ? Colors.black
-                                                  : const Color(0xFF9D9D9D),
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        widget.reservation!.coffee![index]
+                                            .count
+                                            ?.toString() ??
+                                            "",
+                                        style: TextStyle(
+                                          fontSize: index == 0
+                                              ? 20.w(context)
+                                              : 18.w(context),
+                                          fontWeight: index == 0
+                                              ? FontWeight.w500
+                                              : FontWeight.w400,
+                                          color: index == 0
+                                              ? Colors.black
+                                              : const Color(0xFF9D9D9D),
                                         ),
-                                        Expanded(
-                                          child: Text(
-                                            ((widget.reservation!.coffee![index]
-                                                            .count ??
-                                                        0) *
-                                                    (state.productsList[index1]
-                                                            .price ??
-                                                        0))
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: index == 0
-                                                  ? 20.w(context)
-                                                  : 18.w(context),
-                                              fontWeight: index == 0
-                                                  ? FontWeight.w500
-                                                  : FontWeight.w400,
-                                              color: index == 0
-                                                  ? Colors.black
-                                                  : const Color(0xFF9D9D9D),
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        ((widget.reservation!.coffee![index]
+                                            .count ??
+                                            0) *
+                                            (state.productsList[index1]
+                                                .price ??
+                                                0))
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontSize: index == 0
+                                              ? 20.w(context)
+                                              : 18.w(context),
+                                          fontWeight: index == 0
+                                              ? FontWeight.w500
+                                              : FontWeight.w400,
+                                          color: index == 0
+                                              ? Colors.black
+                                              : const Color(0xFF9D9D9D),
                                         ),
-                                      ],
-                                    );
-                                  }
-                                  return const Center(
-                                    child: Text("Not Available"),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: 24.h(context),
-                                  );
-                                },
-                                itemCount: widget.reservation!.coffee != null
-                                    ? widget.reservation!.coffee!.length
-                                    : 0);
-                          } else if (state is GetProductLoading) {
-                            return const LoadingWidget();
-                          }
-                          return const Center(
-                            child: Text("Not Available"),
-                          );
-                        })
-                    : const Center(
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }
+                              return const Center(
+                                child: Text("Not Available"),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                height: 24.h(context),
+                              );
+                            },
+                            itemCount: widget.reservation!.coffee != null
+                                ? widget.reservation!.coffee!.length
+                                : 0);
+                      } else if (state is GetProductLoading) {
+                        return const LoadingWidget();
+                      }
+                      return const Center(
                         child: Text("Not Available"),
-                      ),
+                      );
+                    })
+                    : const Center(
+                  child: Text("Not Available"),
+                ),
               ),
               const Divider(
                 color: Colors.black,
               ),
               ItemOfListClose(
                   text: "Full Time",
-                  text1: widget.reservation == null
-                      ? "3 hours"
-                      : "${widget.reservation!.endDate!.year - widget.reservation!.startDate!.year} y ${widget.reservation!.endDate!.month - widget.reservation!.startDate!.month} m ${widget.reservation!.endDate!.day - widget.reservation!.startDate!.day} d ${widget.reservation!.endDate!.hour - widget.reservation!.startDate!.hour} h ${widget.reservation!.endDate!.minute - widget.reservation!.startDate!.minute} m",
+                  text1: _getFullTime(widget.reservation),
                   text2: widget.reservation == null
                       ? "50 LE"
                       : widget.reservation!.reservationPrice?.toString() ?? "0",
@@ -302,5 +300,15 @@ class _ReceiptWidgetState extends State<ReceiptWidget> {
         ),
       ),
     );
+  }
+
+  String _getFullTime(RoomReservationsModels? reservation) {
+    if (reservation == null || reservation.endDate == null || reservation.startDate == null) {
+      return "0 h 0 m";
+    }
+    final duration = reservation.endDate!.difference(reservation.startDate!);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes % 60;
+    return "$hours h $minutes m";
   }
 }

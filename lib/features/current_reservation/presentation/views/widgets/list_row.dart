@@ -39,7 +39,7 @@ class ListRow extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: 20.w(context)),
       width: Platform.isWindows
-          ? MediaQuery.of(context).size.width * 5.5 / 6
+          ? MediaQuery.of(context).size.width * 5 / 6
           : double.infinity,
       color: color,
       height: 80.h(context),
